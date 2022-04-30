@@ -1,4 +1,11 @@
 
+TODO :
+
+*) Deploy on Heroku
+
+--------------------------------------------
+
+
 `docker-compose up`
 => it starts the whole project. 
 
