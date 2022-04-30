@@ -1,0 +1,42 @@
+
+
+
+<div class="container">
+    <div class="card"  (click)="showDetails(project)"
+         *ngFor="let project of (allProjects    | howFarWeGoBack: howFarWeGoBackCurrentlySelected
+                                                | sortProjects: sortByOption
+                                                | hideEmptyCards : cardTypes.TestCoverage     : (synchUIService.removeEmptyEntries$ | async)
+                                                | showOnlyEmptyCards : cardTypes.TestCoverage : (synchUIService.showOnlyEmptyEntries$ | async)
+                                                | searchProject :(this.synchUIService.filterByNameSearchQuery$ | async))">
+        <div class="card__header">
+            <span class="card__header__name"> {{ project.name }} </span>
+            <div class="card__header__repo" (click)="goToRepo($event, project)">
+                <span class="card__header__repo__text"> Go to Repo </span>
+                <svg class="card__header__repo__icon" >
+                    <use xlink:href="/assets/symbol-defs.svg#icon-external-link"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="card__body">
+            <div class="card__body__info">
+                <p> <span> Nr° Pipelines </span>   <span> : {{ project.pipelines?.length }} </span></p>
+                <p> <span> Nr° Test Reports </span>  <span> : {{ project.stats.numberOfTestReports }} </span></p>
+                <p> <span> Test Coverage </span>  <span> : {{ getTestCoverage(project) }} </span></p>
+                <p> <span> Repo Size </span>  <span> : {{ project.stats.totalRepoSize | convertSizeFromBytesToXXX }} </span></p>
+                <p> <span> Artifacts Size </span>  <span> : {{ project.stats.artifactsSize | convertSizeFromBytesToXXX }} </span></p>
+            </div>
+
+            <div class="card__body__chart">
+                <app-test-coverage-chart *ngIf="project.stats.areTestCoveragesAvailable && project.pipelines.length > 0" [projectSetter]="project"></app-test-coverage-chart>
+                <p *ngIf="!project.stats.areTestCoveragesAvailable || project.pipelines.length === 0"> [NO TEST COVERAGE AVAILABLE <br> IN THIS PROJECT] </p>
+            </div>
+
+            <div class="card__body__status">
+                <app-last-pipeline-status [inDashboardView]="true"  [project]="project"></app-last-pipeline-status>
+            </div>
+        </div>
+
+    </div>
+</div>
+

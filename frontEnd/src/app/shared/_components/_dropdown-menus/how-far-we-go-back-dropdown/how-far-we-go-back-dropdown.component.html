@@ -1,0 +1,17 @@
+
+<div class="orderByNavbar"  *ngIf="shouldWeHideThisComponent()">
+  <h3 class="orderByNavbar__label headerLabel"> Timespan : </h3>
+
+  <div class="orderByNavbar__optionsWrapper optionsWrapper">
+    <span class="orderByNavbar__option containerOfDropdownArrow">
+        {{howFarWeGoBackCurrentlySelected}}
+      <svg class="dropdownArrow">  <use xlink:href="/assets/symbol-defs.svg#icon-select-arrows"></use> </svg>
+    </span>
+
+    <ul class="orderByNavbar__optionsList optionListStyle " >
+      <li class=" optionStyle option" *ngFor="let option of howFarWeGoBackText"
+          [ngClass]="{'optionStyle-selected' : howFarWeGoBackCurrentlySelected == option }"
+          [id]="[option.id]" (click)="optionClicked(option)"> {{ option }} </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+
+<div class="orderByNavbar"  *ngIf="shouldWeHideThisComponent()">
+  <h3 class="orderByNavbar__label headerLabel"> Cards of : </h3>
+
+  <div class="orderByNavbar__optionsWrapper optionsWrapper">
+    <span class="orderByNavbar__option containerOfDropdownArrow">
+        {{ currentSelectedOption.description | shortenText }}
+      <svg class="dropdownArrow">  <use xlink:href="/assets/symbol-defs.svg#icon-select-arrows"></use> </svg>
+      </span>
+
+    <ul class="orderByNavbar__optionsList optionListStyle" >
+      <li class="optionStyle option" *ngFor="let option of cardsTypeOptions"
+          [ngClass]="{'optionStyle-selected' : currentSelectedOption.id === option.id}"
+          [id]="[option.id]" (click)="onClickOption($event)"> {{ option.description }} </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,134 @@
+
+
+
+<div class="container" *ngIf="isDataAvailable">
+
+
+  <div class="left">
+    <div class="left__projectInfoWrapper">
+      <div class="returnButtonWrapper mainButtonStyle mainButtonStyle-textRed" (click)="this.routingService.goToPreviousURL()">
+        <svg class="returnButtonWrapper__svg">  <use xlink:href="/assets/symbol-defs.svg#icon-arrow-left"></use>
+        </svg>
+      </div>
+      <app-test-coverage-banner [project]="projectObj" ></app-test-coverage-banner>
+      <div class="left__projectInfoWrapper__body">
+        <div class="left__projectInfoWrapper__projectInfo">
+          <h3> Project Info : </h3>
+          <ul class="projectInfoWrapper">
+            <li> <label class="projectInfoWrapper__label">&#8226; Name  <span class="projectInfoWrapper__label__colon">:</span> </label>
+              <div class="projectInfoWrapper__value projectName">  {{ projectObj.name }}  </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; ID <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.id }} </div>
+            </li>
+
+            <li> <label class="projectInfoWrapper__label">&#8226; Repo Size <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.totalRepoSize | convertSizeFromBytesToXXX }} </div>
+            </li>
+
+            <li> <label class="projectInfoWrapper__label">&#8226; Artifacts Size <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.artifactsSize | convertSizeFromBytesToXXX }} </div>
+            </li>
+
+            <li> <label class="projectInfoWrapper__label">&#8226; Group Name <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.groupInfo.name }} </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; Group ID <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.groupInfo.id }} </div>
+            </li>
+          </ul>
+        </div>
+        <div class="horizontalSeperationLine-small"></div>
+        <div class="left__projectInfoWrapper__overallStats">
+          <h3> Pipelines Statistics : </h3>
+          <ul class="projectInfoWrapper">
+            <li> <label class="projectInfoWrapper__label">&#8226; Total  <span class="projectInfoWrapper__label__colon">:</span> </label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.numberOfPipelines }}  </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; Successful  <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.numberOfSuccessfulPipelines }} </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; Failed <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.numberOfFailedPipelines }} </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; Canceled <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.numberOfCanceledPipelines }} </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; Skipped <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.numberOfSkippedPipelines }} </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; Running <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.numberOfRunningPipelines }} </div>
+            </li>
+            <li> <label class="projectInfoWrapper__label">&#8226; Success Ratio <span class="projectInfoWrapper__label__colon">:</span></label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.pipelinesSuccessRatio }}% </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="verticalSeperationLine SeperationLine_betweenChartAndInfo"></div>
+
+
+    <div class="left__pipelineChartWrapper">
+      <div class="repoButton mainButtonStyle mainButtonStyle-textRed repoButtonInnerPositioning" (click)="goToRepo()">
+        <span class="rowButton-repo__text repoButtonInnerPositioning__text">REPO</span>
+        <svg class="repoButton__icon repoButtonInnerPositioning__icon">  <use xlink:href="/assets/symbol-defs.svg#icon-files"></use> </svg>
+      </div>
+      <app-pipelines-pie-chart [projectObj]="projectObj"></app-pipelines-pie-chart>
+    </div>
+  </div>
+
+
+  <div class="right">
+
+    <div class="right__top">
+      <nav class="chartsNav">
+        <div class="chartsNav__item" [ngClass]="{'chartsNav__item-selected' : selectedChartType === ChartsTypes.Pipelines }"
+             (click)="onChangeChartType(ChartsTypes.Pipelines)">Pipelines
+        </div>
+        <div class="chartsNav__item" [ngClass]="{'chartsNav__item-selected' : selectedChartType === ChartsTypes.TestReports }"
+             (click)="onChangeChartType(ChartsTypes.TestReports)">Test Reports
+        </div>
+        <div class="chartsNav__item"  [ngClass]="{'chartsNav__item-selected' : selectedChartType === ChartsTypes.TestCoverage }"
+             (click)="onChangeChartType(ChartsTypes.TestCoverage)">Test Coverage
+        </div>
+      </nav>
+
+      <div class="chartsWrapper" *ngIf="isDataAvailableForSelectedChartType">
+        <app-test-report-chart *ngIf="selectedChartType === ChartsTypes.TestReports" [projectSetter]="projectObj"></app-test-report-chart>
+        <app-test-coverage-chart *ngIf="selectedChartType === ChartsTypes.TestCoverage" [projectSetter]="projectObj" ></app-test-coverage-chart>
+        <app-pipelines-bar-chart  *ngIf="selectedChartType === ChartsTypes.Pipelines" [projectSetter]="projectObj" ></app-pipelines-bar-chart>
+      </div>
+    </div>
+
+    <div class="right__seperationLine horizontalSeperationLine" *ngIf="isDataAvailableForSelectedChartType"></div>
+
+    <div class="right__bottom" *ngIf="isDataAvailableForSelectedChartType">
+      <app-pipeline-details-card *ngIf="selectedChartType === ChartsTypes.Pipelines"
+                                 appScrollToPipelineDetails [clickedPipeline]="clickedPipeline">
+      </app-pipeline-details-card>
+
+      <app-test-report-details-card *ngIf="selectedChartType === ChartsTypes.TestReports"
+                                  appScrollToPipelineDetails>
+      </app-test-report-details-card>
+
+<!--      <app-test-coverage-details-card *ngIf="selectedChartType === ChartsTypes.TestCoverage"-->
+<!--                                  appScrollToPipelineDetails>-->
+<!--      </app-test-coverage-details-card>-->
+    </div>
+
+    <div class="noDataBanner" *ngIf="!isDataAvailableForSelectedChartType">
+      <div class="noDataBanner__iconWrapper">
+        <svg> <use xlink:href="/assets/symbol-defs.svg#icon-warning"></use> </svg>
+      </div>
+      <p class="noDataBanner__text"> No Data Available yet</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+

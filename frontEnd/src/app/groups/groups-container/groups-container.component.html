@@ -1,0 +1,39 @@
+
+
+<div class="groupPanelContainer" *ngIf="shouldWeHideThisElement_groupPanelContainer()"
+     [ngClass]="{ 'groupPanelContainer-closed' : closeGroupPanelContainer }" @groupsPanelState>
+  <div class="groupsPanel">
+    <div class="groupsPanel__groupsContainer">
+      <div  *ngFor="let group of allGroups; let i = index"
+            class="groupsPanel__groupsContainer__group"
+            [ngClass]="{ 'groupsPanel__groupsContainer__group-selected' : highlightSelectedGroup(group) }"
+            (click)="showProjects($event ,  group , false)" >
+        <div> {{ group.name }} </div>
+
+        <div class="customerSubgroupsContainer" *ngIf="group.name == CustomerGroupName">
+          <div  *ngFor="let customerGroup of allGroups[CustomerGroupIndex].subGroups"
+                class="customerSubgroupsContainer__group  groupsPanel__groupsContainer__group"
+                [ngClass]="{ 'customerSubgroupsContainer__group-selected' : customerGroup === selectedGroup }"
+                (click)="showProjects($event , customerGroup , true)">
+            {{ customerGroup.name }}  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="selectedGroupName"  *ngIf="shouldWeHideThisElement_selectedGroupName()">
+<!--<div class="selectedGroupName"  *ngIf="!routingService.areWeInOverview() || routingService.areWeInDetailsView()">-->
+  <span> group name : </span>  {{ (groupsDataService.selectedGroup$ | async)?.name }}
+</div>
+
+
+
+<main class="main">
+  <div class="router-outletWrapper"  [@viewTypeRouteTransitionTrigger]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</main>
+
+

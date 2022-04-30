@@ -1,0 +1,67 @@
+
+<div class="container"  appGoBackToScrolledPosition
+     [ngClass]="{ 'container-adjustGrid' : (this.synchUIService.filterByNameSearchQuery$ | async) || weAreInGroupsViewAndOnlyFewItemsDisplayed() ,
+      blurBackgroundOfPopup : showProjectDetailsNow }">
+
+
+
+
+<!--  <div class="lastXXXDaysSidebar" [ngClass]="{ 'lastXXXDaysSidebar-inGroupsView' : areWeInGroupsView() , 'lastXXXDaysSidebar-inProjectsView' : !areWeInGroupsView()  }">-->
+<!--    <h3 class="lastXXXDaysSidebar__header headerLabel">  Data Displayed : </h3>-->
+
+<!--    <div *ngFor="let option of howFarWeGoBack_text" class="lastXXXDaysSidebar__option optionStyle"-->
+<!--         [ngClass]="{ 'optionStyle-selected' : howFarWeGoBack_currentlySelected == option }"-->
+<!--         (click)="optionClicked(option)" >-->
+<!--      {{ option }}-->
+<!--    </div>-->
+
+
+<!--  </div>-->
+
+
+
+  <ng-container  *ngIf="(this.synchUIService.changeCards$ | async).id == cardTypes.Pipelines">
+    <app-pipelines-chart-card *ngFor="let project of (allProjects | hideEmptyCards : cardTypes.Pipelines     : (synchUIService.removeEmptyEntries$ | async)
+                                                                  | showOnlyEmptyCards : cardTypes.Pipelines : (synchUIService.showOnlyEmptyEntries$ | async)
+                                                                  | sortProjectsBasedOnXXX: cardTypes.Pipelines
+                                                                  | howFarWeGoBack: howFarWeGoBackCurrentlySelected
+                                                                  | searchProject:(this.synchUIService.filterByNameSearchQuery$ | async))"
+                                [project]="project" (click)="showDetails(project)" #finalProjectsToDisplay>
+    </app-pipelines-chart-card>
+  </ng-container>
+
+
+  <ng-container *ngIf="(this.synchUIService.changeCards$ | async).id == cardTypes.TestReports">
+    <app-test-report-card *ngFor="let project of (allProjects  | hideEmptyCards : cardTypes.TestReports : (synchUIService.removeEmptyEntries$ | async)
+                                                               | showOnlyEmptyCards : cardTypes.TestReports : (synchUIService.showOnlyEmptyEntries$ | async)
+                                                               | howFarWeGoBack: howFarWeGoBackCurrentlySelected
+                                                               | sortProjectsBasedOnXXX: cardTypes.TestReports
+                                                               | searchProject:(this.synchUIService.filterByNameSearchQuery$ | async))"
+                              [project]="project" (click)="showDetails(project)" #finalProjectsToDisplay>
+    </app-test-report-card>
+  </ng-container>
+
+
+  <ng-container *ngIf="(this.synchUIService.changeCards$ | async).id == cardTypes.TestCoverage">
+    <app-test-coverages-chart-card *ngFor="let project of (allProjects | hideEmptyCards : cardTypes.TestCoverage : (synchUIService.removeEmptyEntries$ | async)
+                                                                       | showOnlyEmptyCards : cardTypes.TestCoverage : (synchUIService.showOnlyEmptyEntries$ | async)
+                                                                       | howFarWeGoBack: howFarWeGoBackCurrentlySelected
+                                                                       | sortProjectsBasedOnXXX: cardTypes.TestCoverage
+                                                                       | searchProject:(this.synchUIService.filterByNameSearchQuery$ | async))"
+                                   [project]="project" (click)="showDetails(project)" #finalProjectsToDisplay>
+    </app-test-coverages-chart-card>
+  </ng-container>
+
+
+
+</div>
+
+
+<div class="projectInfoPopupBackground" *ngIf="showProjectDetailsNow">
+  <div class="projectInfoPopupWrapper">
+    <app-project-info
+      [projectObj]="clickedProject" (closeProjectInfoWindow)="showProjectDetailsNow = false">
+    </app-project-info>
+  </div>
+</div>
+

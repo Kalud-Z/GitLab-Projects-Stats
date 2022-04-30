@@ -1,0 +1,35 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+
+:host {
+  height: 4rem;
+  margin-left: auto; // stays on the right side
+  align-self: flex-start;
+}
+
+
+.nav {
+  height: 100%;
+  width: fit-content;
+  //border-radius: 3px;
+  box-shadow: -1px 1px 1px 1px rgba(0, 0, 200, 0.3);
+
+  @include flexCenter;
+
+  &__item {
+    cursor: pointer;
+    height: 100%;
+    font-size: 1.5rem;
+    padding: 0 2rem;
+    @include flexCenter;
+
+    &:not(:last-child) {  border-right: 1px solid rgba(0, 0, 200, 0.2) }
+
+    &-active {
+      background: $color-red;
+      background: linear-gradient(0deg, rgb(255, 67, 56 , 0.5) 0%, rgba(255,255,255,0) 100%);
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+
+.instructionBanner {
+  //color : white;
+  color : $color-blue-main;
+  font-family: 'Nunito', sans-serif;
+  font-style: italic;
+  padding:1.2rem;
+  font-size: 1.8rem;
+  //background-color: $color-red;
+  background-color: $color-green;
+  //border-radius: 4px;
+  @include flexCenter;
+  text-align: center;
+  position: relative;
+
+  &__deleteIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: rgb(0, 0, 0, 0.5);
+    position: absolute;
+    top:0;
+    right:0;
+    transform: translate(-15%, 15%);
+    transition: 0.1s ease-out;
+    cursor: pointer;
+
+    &:hover {
+      fill: rgb(0, 0, 0, 0.85);
+    }
+  }
+
+  &__icon {
+    fill: currentColor;
+    height:2.5rem;
+    width:2.5rem;
+    margin-right: .75rem;
+  }
+}

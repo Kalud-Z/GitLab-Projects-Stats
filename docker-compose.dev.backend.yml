@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_USER: kalud
+      POSTGRES_PASSWORD: xxx
+      POSTGRES_DB: kalud-db
+    volumes:
+      - postgres-database:/var/lib/postgresql/data
+
+
+volumes:
+  postgres-database:

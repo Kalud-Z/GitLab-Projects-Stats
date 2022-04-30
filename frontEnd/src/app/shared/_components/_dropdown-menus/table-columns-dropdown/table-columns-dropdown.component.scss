@@ -1,0 +1,96 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+
+
+:host {
+  margin-left: 2rem;
+}
+
+
+.container {
+  height: 4rem;
+  width: 12rem;
+  cursor: pointer;
+
+  &:hover .columnsListWrapper {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  & .header {
+    position: relative;
+    font-size: 1.4rem;
+    color: #961111;
+    height: 4rem;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 200, 0.3);
+    background: linear-gradient(0deg, #4dfdba 0%, rgba(77, 253, 186, 0) 100%);
+    @include flexCenter;
+    border-left: 2px solid #9A9AE9;
+    &__text { margin-left: -9px}
+  }
+
+  & .columnsListWrapper {
+    z-index: 201;
+    opacity: 0;
+    visibility: hidden;
+    width: fit-content;
+    transition: 0.2s ease-out;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 200, 0.5);
+    margin-top: 4px;
+    margin-left: 4px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr 1fr 1fr;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top:0;
+      background-color: transparent;
+      top: -6px;
+      left: 0;
+      width: 33%;
+      height: 1rem;
+
+    }
+
+    &__item {
+      height: 100%;
+      &:nth-last-child(2) { border-bottom: none }
+      &:nth-child(2n + 1) { border-right: 1px solid rgba(0, 0, 200, 0.25) }
+      @include flexCenter;
+      &-noCLickAllowed { cursor: not-allowed !important }
+      text-decoration: line-through;
+      transition: 0.1s ease-out;
+
+      &-selected {
+        text-decoration: none;
+        &:hover { background-color: #8dd78d !important;}
+      }
+    }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

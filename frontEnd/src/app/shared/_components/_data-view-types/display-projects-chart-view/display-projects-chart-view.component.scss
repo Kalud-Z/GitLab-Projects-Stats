@@ -1,0 +1,108 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+
+:host {
+  position: relative;
+  height: 97%;
+  width: 99.8%;
+  display : block;
+  overflow-y: scroll;
+
+  position: absolute;
+}
+
+
+
+.adjustSizeButtonsWrapper {
+  z-index: 2000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-6%, 68%);
+
+  @include flexCenter;
+
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+    fill: $color-pink;
+    &:hover { fill:  #e1b4a7;}
+    cursor: pointer;
+    z-index: 3456;
+  }
+
+  &__resizeTo100 {
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 0.4rem;
+    padding:0 0.5rem;
+    z-index: 3456;
+    height: 2.35rem;
+    width:fit-content;
+    background-color: $color-pink;
+    @include flexCenter;
+    &:hover {
+      background-color: #e1b4a7;
+    }
+
+    &__text {
+      font-size: 1.4rem;
+      color: rgb(105, 105, 105 , 0.6);
+
+      &-active {
+        color: $color-blue-main !important;
+      }
+    }
+
+    &__icon {
+      fill: white;
+      margin-left: 0.65rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+}
+
+
+.chartWrapper {
+  z-index: 1999;
+  padding-top: 2rem;
+  position: relative;
+  transition: 0.5s ease-out;
+}
+
+
+.loadingSpinnerWrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+}
+
+
+
+
+// UTILITY CLASSES ###########################################################################################################################################
+
+.chartWrapper-Height100 {height: 98% !important;}
+.chartWrapper-Height120 {height: 120% !important;}
+.chartWrapper-Height140 {height: 140% !important;}
+.chartWrapper-Height160 {height: 160% !important;}
+.chartWrapper-Height180 {height: 180% !important;}
+
+.chartWrapper-Height200 {height: 200% !important;}
+.chartWrapper-Height220 {height: 220% !important;}
+.chartWrapper-Height240 {height: 240% !important;}
+.chartWrapper-Height260 {height: 260% !important;}
+.chartWrapper-Height280 {height: 280% !important;}
+.chartWrapper-Height300 {height: 300% !important;}
+
+
+
+.gaga {
+  height: 22rem;
+  width: 63rem;
+  background-color: red;
+}

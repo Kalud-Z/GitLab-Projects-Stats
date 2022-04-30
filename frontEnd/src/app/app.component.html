@@ -1,0 +1,87 @@
+
+
+  <header *ngIf="introDone" @firstViewState>
+    <div class="titleAndLogoWrapper" routerLink="/groups">
+      <img src="assets/pictures/w11k-logo.png" alt="w11k-logo">
+      <p>w11k-devs</p>
+    </div>
+
+    <div class="mainNav">
+      <div class="mainNav__item" routerLinkActive="mainNav__item-selected" routerLink="/groups"   (click)="onClickGroups()" > GROUPS </div>
+      <div class="mainNav__item" routerLinkActive="mainNav__item-selected" routerLink="/projects" (click)="onClickProjects()" > PROJECTS </div>
+    </div>
+
+    <div class="dataInfoContainer" >
+      <div class="dataInfoContainer__dateLastUpdate" (click)="fetchTestReport()" > Data Last-Update  </div>
+      <div class="dataInfoContainer__howLongAgo" *ngIf="showDateLastFetched">  <br> {{ dateLastFetched | date: 'short' }}  </div>
+      <div class="dataInfoContainer__refreshButton" [ngClass]="{ buttonLoading : repairingDataNow }" (click)="shouldWeShowPopup()"> Repair Data
+        <svg class="dataInfoContainer__refreshButton__icon" *ngIf="!repairingDataNow">  <use xlink:href="/assets/symbol-defs.svg#icon-tools"></use> </svg>
+        <svg class="dataInfoContainer__refreshButton__icon spinnerIcon" *ngIf="repairingDataNow">  <use xlink:href="/assets/symbol-defs.svg#icon-spinner10"></use> </svg>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" *ngIf="doneFetchingData"  [@mainRouteTransitionTrigger]="prepareRoute(outlet)" >
+
+    <div class="main__navBarsContainer" [ngClass]="{ 'main__navBarsContainer-inCardsView': routingService.areWeInCardView() }" >
+
+      <app-type-of-chart-data-dropdown class="firstRow stickToTheLeft" *ngIf="routingService.areWeInChartView()"
+        (optionClicked)="onTypeOfChartsDataDropdownClick($event)"
+        [orderByOptions]="orderByOptions">
+      </app-type-of-chart-data-dropdown>
+
+      <app-type-of-cards-dropdown class="firstRow stickToTheLeft"
+        (optionClicked)="onTypeOfCardsDataDropdownClick($event)"
+        [cardsTypeOptions]="cardsTypeOptions">
+      </app-type-of-cards-dropdown>
+
+
+      <app-how-far-we-go-back-dropdown class="secondRow stickToTheLeft allColumns"></app-how-far-we-go-back-dropdown>
+
+      <app-table-columns-dropdown class="firstRow" *ngIf="routingService.areWeInListView()">
+      </app-table-columns-dropdown>
+
+      <app-filter-dropdown class="firstRow stickToTheLeft"
+                           [ngClass]="{ blurElement: routingService.areWeInDetailsView() }" >
+      </app-filter-dropdown>
+
+      <app-sort-dashboard-dropdown class="firstRow stickToTheLeft"
+                       [ngClass]="{ blurElement: routingService.areWeInDetailsView() }" >
+      </app-sort-dashboard-dropdown>
+
+
+
+      <app-search-bar class="firstRow stickToTheRight"
+        [ngClass]="{ blurElement : routingService.areWeInChartView() || routingService.areWeInDetailsView()}">
+      </app-search-bar>
+
+      <div class="groupsOverviewTitle firstRow" *ngIf="routingService.areWeInOverview()"> Groups Overview  </div>
+
+      <view-type-tabs class="firstRow stickToTheRight"></view-type-tabs>
+    </div>
+
+
+    <div class="main__routerOutletWrapper">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </main>
+
+
+
+  <div class="repairDataPopup" *ngIf="showPopup">
+    <p class="text"> This action will delete all content of the Database
+      <br> and try to fetch new data from Gitlab API.
+      <br>  Are you sure you want to proceed ?
+    </p>
+    <div class="buttonsContainer">
+      <div class="button button-yes" (click)="showFinalStepPopup = true" > Yes </div>
+      <div class="button button-cancel" (click)="showPopup = false; showFinalStepPopup = false"> Cancel </div>
+    </div>
+
+    <div class="finalStep" *ngIf="showFinalStepPopup">
+      <p class="finalStep__text" > how many pipelines to fetch ? (1 - 100)</p>
+      <input class="finalStep__input" type="number" min="1" max="100"  [(ngModel)]="numOfPipelinesToFetch">
+      <button class="finalStep__button" (click)="repairDatabase()"> Fetch Now </button>
+    </div>
+
+  </div>

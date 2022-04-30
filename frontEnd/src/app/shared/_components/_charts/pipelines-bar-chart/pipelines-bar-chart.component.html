@@ -1,0 +1,12 @@
+
+<div class="chartWrapper" *ngIf="showChart">
+    <canvas baseChart
+                      [datasets]="pipelinesDurationsChart.barChartData"
+                      [labels]="pipelinesDurationsChart.barChartLabels"
+                      [options]="pipelinesDurationsChart.barChartOptions"
+                      [plugins]="pipelinesDurationsChart.barChartPlugins"
+                      [legend]="pipelinesDurationsChart.barChartLegend"
+                      [chartType]="pipelinesDurationsChart.barChartType">
+    </canvas>
+</div>
+

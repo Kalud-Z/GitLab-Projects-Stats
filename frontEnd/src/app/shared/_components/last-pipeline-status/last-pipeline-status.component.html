@@ -1,0 +1,48 @@
+
+
+
+<div class="container" [ngClass]="getClass('container')" *ngIf="!inTableListView && !inDashboardView ">
+  <span class="key"> STATUS  <span class="key__colon">:</span> </span>
+  <span class="value" [ngClass]="getClass('value')">
+     <span *ngIf="project.stats.status"> {{ project.stats.status?.toUpperCase() }} </span>
+     <span *ngIf="!project.stats.status">  ------- </span>
+    <svg class="icon" *ngIf="project.stats.status == 'failed'">  <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'success'">  <use xlink:href="/assets/symbol-defs.svg#icon-checkmark"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'canceled'">  <use xlink:href="/assets/symbol-defs.svg#icon-block_flipped"></use> </svg>
+    <svg class="icon icon-running" *ngIf="project.stats.status == 'running'">  <use xlink:href="/assets/symbol-defs.svg#icon-spinner10"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'skipped'">  <use xlink:href="/assets/symbol-defs.svg#icon-redo"></use> </svg>
+  </span>
+</div>
+
+
+
+<div class="container" [ngClass]="getClass('container')" *ngIf="inDashboardView">
+    <span class="key"> Last Pipeline  <span class="key__colon">:</span> </span>
+    <span class="value" [ngClass]="getClass('value')">
+     <span *ngIf="project.stats.status"> {{ project.stats.status?.toUpperCase() }} </span>
+     <span *ngIf="!project.stats.status">  ------- </span>
+    <svg class="icon" *ngIf="project.stats.status == 'failed'">  <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'success'">  <use xlink:href="/assets/symbol-defs.svg#icon-checkmark"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'canceled'">  <use xlink:href="/assets/symbol-defs.svg#icon-block_flipped"></use> </svg>
+    <svg class="icon icon-running" *ngIf="project.stats.status == 'running'">  <use xlink:href="/assets/symbol-defs.svg#icon-spinner10"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'skipped'">  <use xlink:href="/assets/symbol-defs.svg#icon-redo"></use> </svg>
+  </span>
+</div>
+
+
+
+
+<div class="container" [ngClass]="getClass('container')" *ngIf="inTableListView">
+  <span class="value" [ngClass]="getClass('value')">
+     <span *ngIf="project.stats.status"> {{ project.stats.status?.toUpperCase() }} </span>
+     <span *ngIf="!project.stats.status">  ------- </span>
+    <svg class="icon" *ngIf="project.stats.status == 'failed'">  <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'success'">  <use xlink:href="/assets/symbol-defs.svg#icon-checkmark"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'canceled'">  <use xlink:href="/assets/symbol-defs.svg#icon-block_flipped"></use> </svg>
+    <svg class="icon icon-running" *ngIf="project.stats.status == 'running'">  <use xlink:href="/assets/symbol-defs.svg#icon-spinner10"></use> </svg>
+    <svg class="icon" *ngIf="project.stats.status == 'skipped'">  <use xlink:href="/assets/symbol-defs.svg#icon-redo"></use> </svg>
+  </span>
+</div>
+
+
+

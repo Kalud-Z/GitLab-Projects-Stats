@@ -1,0 +1,35 @@
+@import "src/mixins";
+
+
+.container {
+  height: 100%;
+
+  @include flexCenter;
+  flex-direction: column;
+  align-items: stretch;
+
+  .chart {
+    padding: 1rem 3rem;
+    height: 80%;
+  }
+
+
+
+  .successRatioBar {
+    height: 20%;
+    width: 100%;
+
+    color : rgb(0, 0, 255);
+
+    @include flexCenter;
+    flex-direction: column;
+
+    & label {
+      font-size: 1.3rem;
+    }
+
+    & progress-bar {
+      width:66%;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+
+<ng-container *ngIf="showBanner">
+    <div class="instructionBanner" *ngIf="true" @displayPipelineChartBannerState>
+        <svg class="instructionBanner__deleteIcon" (click)="showBanner = false">  <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>
+        <svg class="instructionBanner__icon">  <use xlink:href="/assets/symbol-defs.svg#icon-information"></use> </svg>
+        Click a test Coverage on the chart to display its details
+    </div>
+</ng-container>

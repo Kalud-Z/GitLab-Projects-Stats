@@ -1,0 +1,299 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+
+:host {
+  @include flexCenter;
+  flex-direction: column;
+  //display : none;
+}
+
+
+
+$marginBetweenHeaderAndBody : 2rem;
+$headerHeight: 10vh;
+//@include respond(huge-desktop) { $headerHeight: 3vh; }
+//@include respond(extra-huge-desktop) { $headerHeight: 5.5vh; }
+
+$mainBodyHeight: calc(100vh - #{$headerHeight} - (#{$marginBetweenHeaderAndBody} * 2));
+
+header {
+  height: $headerHeight;
+
+  //@include respond(huge-desktop) { height: 8vh; }
+  //@include respond(extra-huge-desktop) { height: 5.5vh; }
+
+  margin-bottom: $marginBetweenHeaderAndBody ;
+}
+
+
+.main {
+  height : $mainBodyHeight;
+  width: 97vw;
+  background-color: white;
+  box-shadow: inset 0 0 2px 1px rgb(0,0,200, 0.5);
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+
+
+  &__routerOutletWrapper {
+    overflow-y: hidden;
+    height: 100%;
+    display: flex;
+  }
+
+
+  &__navBarsContainer {
+    //display: grid;
+    //grid-template-rows: 6rem 6rem;
+    //grid-template-columns: min-content ;
+
+    display : flex;
+    align-items: flex-start;     // vertical alignment
+    height: 6rem;
+
+    width: 100%;
+    position: relative;
+
+    &-inCardsView {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: min-content ;
+      //margin-bottom: 4.3rem;
+      row-gap: 1rem;
+      height:auto;
+    }
+
+    .groupsOverviewTitle {
+      color: lighten($color-blue-main , 22%) ;
+      padding-bottom: 3px;
+      border-bottom: 0.005em  solid lighten($color-blue-main , 45%);
+      @include centerAbsolutePositioning;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .allColumns {
+      grid-column: 1/3 ;
+    }
+
+    .firstRow {
+      grid-row: 1/2 ;
+    }
+
+
+    .firstColumn {
+      grid-column: 1/2 ;
+    }
+
+
+    .secondRow {
+      grid-row: 2/3 ;
+    }
+
+    .stickToTheLeft {
+      justify-self: start;
+    }
+
+    .stickToTheRight {
+      justify-self: end;
+    }
+
+    app-type-of-cards-dropdown { z-index: 300 }
+    app-how-far-we-go-back-dropdown { z-index: 299 }
+
+  }
+
+
+}
+
+
+.titleAndLogoWrapper {
+  position: fixed;
+  top: -2px;
+  left: -2px;
+  padding :1rem 2rem;
+  width: fit-content;
+  background-color: white;
+  box-shadow: inset -2px -2px 5px 0px fade-out($color-red, 0.8);
+  @include flexCenter;
+
+  & img {
+    width: 11rem;
+    @include respond(big-desktop-1) { width: 12rem; }
+    @include respond(big-desktop-2) { width: 13rem; }
+    @include respond(big-desktop-3) { width: 14rem; }
+    @include respond(big-desktop-4) { width: 15rem; }
+    @include respond(big-desktop-5) { width: 16rem; }
+    margin-right: 2rem;
+  }
+
+  & p {
+    color: black;
+    font-size: 3rem;
+  }
+
+}
+
+
+.mainNav {
+  border-bottom : 1px solid fade-out($color-red , .65)	 ;
+
+  height: 100%;
+  display: flex;
+
+  &__item {
+    border-bottom: 3px solid transparent;
+    padding: 0 2rem;
+    transition: 0.15s;
+    font-size: 3rem;
+    cursor: pointer;
+    color: $color-blue-main;
+    @include flexCenter;
+
+    &:not(:last-child) {
+    }
+
+    &-selected {
+      background-color: $color-pink;
+      border-bottom: 3px solid blue;
+    }
+  }
+}
+
+
+.dataInfoContainer {
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  right: 0;
+  transform: translate(-2%, 5%);
+  background-color: rgb(0, 0, 255 , 0.1);
+  border-radius: 4px;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5rem;
+  @include flexCenter;
+  flex-direction: column;
+
+  &__dateLastUpdate {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  &__howLongAgo {
+    font-size: 0.8rem;
+    font-style: italic;
+    letter-spacing:1px;
+    margin-bottom: 1rem;
+  }
+
+  &__refreshButton {
+    font-size: 1.25rem;
+    height:2.7rem;
+    width: fit-content;
+    border-radius: 3px;
+    background-color: lighten(#FF4338 , 11%) ;
+    padding:0 1rem;
+    @include flexCenter;
+    cursor:pointer;
+
+    &__icon {
+      fill: currentColor;
+      height: 1.2rem;
+      width: 1.2rem;
+      margin-left: 0.7rem;
+    }
+
+  }
+
+  .spinnerIcon {
+    -webkit-animation:spin 2s linear infinite;
+    -moz-animation:spin 2s linear infinite;
+    animation:spin 2s linear infinite;
+  }
+
+}
+
+
+
+.repairDataPopup {
+  border-radius: 3px;
+  position: fixed;
+  top: 1%;
+  right: 9%;
+  padding:2rem;
+  background-color: #d96f6f;
+  font-size: 2rem;
+  z-index: 510;
+
+  .text {
+
+  }
+
+  .buttonsContainer {
+    padding-top:1rem;
+    @include flexCenter;
+
+
+    .button {
+      padding:0.8rem;
+      border:1px solid blue;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: 0.1s;
+
+      &:hover {
+        background-color: darken(#d96f6f , 6%) ;
+      }
+
+      &-yes {
+        margin-right: 2rem ;
+      }
+    }
+  }
+
+  .finalStep {
+    margin-top: 2rem;
+    padding: 2rem;
+    border:4px solid red;
+    border-radius: 3px;
+
+    &__text { margin-bottom: 0.4rem }
+
+    &__input {
+      margin-bottom: 3.4rem;
+      padding: 1rem;
+      width: 8rem;
+      display: block;
+    }
+
+    &__button {
+      cursor: pointer;
+      padding:1rem;
+    }
+
+  }
+
+}
+
+
+
+
+
+
+
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+.buttonLoading {
+  cursor: progress !important;
+}

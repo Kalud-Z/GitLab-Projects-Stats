@@ -1,0 +1,176 @@
+@import "src/mixins";
+@import "src/variables";
+
+:host {
+  height: 100%;
+  width: 100%;
+  @include flexCenter;
+  //border: 2px solid yellow;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 99%;
+  height: 98%;
+  //background-color: red;
+  overflow-y: scroll;
+}
+
+.card {
+  margin-bottom: 3rem;
+  align-self: center;
+  height: max-content;
+  cursor: pointer;
+  font-size: 1.4rem;
+  border: 1px solid transparent;
+  transition: 0.1s ease-out;
+  width: 80vw;
+
+  @include flexCenter;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 0 3px 1px rgb(166, 166, 166, 0.7)
+  }
+
+
+  &__header {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: 'Merriweather Sans', sans-serif;
+    background-color: #D4D4D4;
+    font-weight: 700;
+    height: fit-content;
+    width: 100%;
+    margin-bottom: .1rem;
+    border: 2px solid transparent;
+    transition: 0.1s;
+    padding:1rem;
+    padding-left: 4rem;
+    display: flex;
+
+    &__name {
+      font-size: 1.65rem;
+      max-width: 88%;
+    }
+
+
+    &__id {
+      grid-row: 4/5;
+      grid-column: 1/2;
+      align-self: end;
+      justify-self: end;
+      margin-right: 2.5px;
+      font-weight: 400;
+      font-size: 75%;
+    }
+
+
+    &__repo {
+      font-size: 1.2rem ;
+      margin-left: auto;
+      transition: 0.145s ease-out;
+      &:hover { fill: #488AFF }
+      color: blue;
+      cursor: pointer;
+      @include flexCenter;
+
+      &:hover {
+        color: #488AFF;
+        &__icon { fill: currentColor}
+      }
+
+      &__text {}
+
+      &__icon {
+        margin-left: 0.6rem;
+        height: 1.8rem;
+        width: 1.8rem;
+        fill : currentColor;
+        &:active &:focus { outline: none !important } //TODO : in chrome , weird black border appears around the icon when clicked.
+      }
+    }
+
+
+    app-test-coverage-banner {
+      font-size: 70%;
+      grid-row: 4/5;
+      grid-column: 1/2;
+      align-self: end;
+      justify-self: start;
+      transform: translate(1%, 50%);
+      z-index: 20;
+    }
+  }
+
+  &__body {
+    border-bottom-right-radius: 2px ;
+    border-bottom-left-radius: 2px ;
+    z-index: 19;
+    width: 100%;
+    height: fit-content;
+    padding: .5rem;
+    border: 1px solid #D4D4D4;
+    background-color: #FFE5E5;
+    transition: 0.1s;
+
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 1fr;
+    & >*:not(:last-child) {
+      border-right: 1px solid rgb(164, 40, 159 , 0.2);
+    }
+
+    &__info {
+      width: 100%;
+      padding: 1rem 2rem;
+      padding-top:  1rem;
+      font-size: 1.26rem;
+
+      @include flexCenter;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+
+      & p {
+        display: grid;
+        grid-template-columns: 17rem 1fr;
+        grid-column-gap: 0.6rem;
+        justify-items: start;
+
+        &:not(:last-child) {margin-bottom: 0.4rem }
+      }
+    }
+
+    &__chart {
+      width: 100%;
+      height: 20rem;
+      @include flexCenter;
+      //flex-direction: column;
+
+      &__title {
+        margin-bottom: 0.4rem;
+        display: none;
+      }
+    }
+
+    &__status {
+      padding-top:  1rem;
+      display: flex;
+      flex-direction: column;
+      justify-self: center;
+    }
+  }
+}
+
+
+
+
+app-pipelines-pie-chart {
+  width: 100%;
+  height: 100%;
+}

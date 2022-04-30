@@ -1,0 +1,199 @@
+@import "src/mixins";
+
+
+:host {
+  height: 100%;
+  width: 100%;
+  @include flexCenter;
+  position: relative;
+}
+
+.container {
+  height: 97%;
+  width: 99.4%;
+  padding:2rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+
+  display: grid;
+  grid-template-columns : repeat(auto-fit , minmax(30rem, 1fr));  // TODO : still not perfect. I had to add a class , when filter is active
+  grid-gap : 2rem;
+}
+
+.card {
+  align-self: center;
+  height: max-content;
+  cursor: pointer;
+  font-size: 1.4rem;
+  border: 1px solid transparent;
+  transition: 0.1s ease-out;
+
+  @include flexCenter;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 0 3px 1px rgb(166, 166, 166, 0.7)
+  }
+
+
+  &__header {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    font-family: 'Merriweather Sans', sans-serif;
+    background-color: #D4D4D4;
+    font-weight: 700;
+    height: auto;
+    width: 100%;
+    margin-bottom: .1rem;
+    border: 2px solid transparent;
+    transition: 0.1s;
+
+    display: grid;
+    grid-template-rows: repeat(4, 2.7rem);
+    grid-auto-rows: 1fr;
+
+    &__name {
+      grid-column: 1/2;
+      grid-row: 1/-1;
+      align-self: center;
+      justify-self: center;
+      font-size: 1.65rem;
+      max-width: 88%;
+      text-align: center;
+    }
+
+    &__id {
+      grid-row: 4/5;
+      grid-column: 1/2;
+      align-self: end;
+      justify-self: end;
+      margin-right: 2.5px;
+      font-weight: 400;
+      font-size: 75%;
+    }
+
+    &__repoIcon {
+      grid-column: 1/2;
+      grid-row: 1/2;
+      margin-left: 0.2rem;
+      margin-top: 0.2rem;
+      align-self: center;
+      justify-self: start;
+      height: 2.4rem;
+      width: 2.4rem;
+      fill : currentColor;
+      transition: 0.145s ease-out;
+      &:hover { fill: #488AFF }
+      &:active &:focus { outline: none !important } //TODO : in chrome , weird black border appears around the icon when clicked.
+    }
+
+    app-test-coverage-banner {
+      font-size: 70%;
+      grid-row: 4/5;
+      grid-column: 1/2;
+      align-self: end;
+      justify-self: start;
+      transform: translate(10%, 50%);
+      z-index: 20;
+    }
+  }
+
+  &__body {
+    border-bottom-right-radius: 2px ;
+    border-bottom-left-radius: 2px ;
+    z-index: 19;
+    width: 100%;
+    height: fit-content;
+    padding: .5rem;
+    border: 1px solid #D4D4D4;
+    background-color: #FFE5E5;
+    transition: 0.1s;
+
+    position: relative;
+    @include flexCenter;
+    flex-direction: column;
+
+    &__info {
+      border-bottom: 1px solid #D4D4D4;
+      width: 100%;
+      padding: 1rem 2rem;
+      padding-top:  2rem;
+      font-size: 1.2rem;
+
+
+      @include flexCenter;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      & p {
+        display: grid;
+        grid-template-columns: 17rem 1fr;
+        grid-column-gap: 0.6rem;
+        justify-items: start;
+
+        &:not(:last-child) {margin-bottom: 0.4rem }
+      }
+
+    }
+
+    &__chart {
+      width: 100%;
+      height: 30rem;
+      @include flexCenter;
+      flex-direction: column;
+
+      &__title {
+        margin-bottom: 0.4rem;
+        display: none;
+      }
+    }
+  }
+}
+
+
+app-pipelines-pie-chart {
+  width: 100%;
+  height: 100%;
+}
+
+
+.projectInfoPopupBackground {
+  position: absolute;
+  z-index: 22346869;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(2, 0, 0, 0.6);
+  @include flexCenter;
+
+
+.projectInfoPopupWrapper {
+    height: 20rem;
+    width: 44rem;
+    @include flexCenter;
+    app-project-info {
+      font-size: 1.5rem;
+    }
+  }
+
+
+}
+
+
+
+// UTILITY CLASSES #######################################################################################################################################
+
+.isFilterActive {
+  grid-template-columns : repeat(auto-fit , minmax(30rem, 33rem)) !important;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+
+
+
+<div class="container" [ngClass]="getClass('container')" *ngIf="!inTableListView">
+  <span class="key"> Test Coverage <span class="key__colon">:</span> </span>
+  <span class="value" [ngClass]="getClass('value')">
+    {{ getTestCoverage(project) }}
+  </span>
+</div>
+
+
+
+
+
+
+<!--//'success' | 'failed' | 'canceled' | 'skipped' | 'running' | string-->
+
+
+
+
+
+
+
+

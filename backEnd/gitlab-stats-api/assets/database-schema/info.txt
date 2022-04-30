@@ -1,0 +1,106 @@
+tool used :
+
+https://app.quickdatabasediagrams.com/#/d/89bQK8
+---------------------------------------------------------------
+
+
+code 
+
+
+
+
+
+Group
+-
+name PK   string
+id       number
+projects Project[]
+subGroups Group[]
+stats GroupStats
+
+
+
+Project
+-
+id PK number
+groupID FK >- Group.id
+name string
+urlToRepo string
+pipelines Pipeline[]
+groupInfo GroupInfo
+status pipelineStatus
+stats ProjectStats
+
+
+
+
+GroupStats
+-
+id PK number
+isThereSubgroups boolean
+numberOfProjects number
+testCoverageOfAllProjects number
+numberOfPipelines number
+numberOfTestReports number
+groupID  number FK - Group.id
+
+
+
+Pipeline
+-
+id PK number
+projectID number FK >- Project.id
+status pipelineStatus
+testReport TestReport
+stats PipelineStats
+
+
+TestReport
+-
+id number PK
+pipelineID number FK - Pipeline.id
+error_count number
+failed_count number
+skipped_count number
+success_count number
+total_count number
+total_time number
+
+
+PipelineStats
+-
+id number PK 
+pipelineID number FK - Pipeline.id
+isTestReportAvailable boolean
+duration number
+duration_inMinutes number
+created_at string
+created_at_rawDateFormat Date
+testCoverage number
+
+
+GroupInfo
+-
+projectID number FK - Project.id
+name  string
+id  number PK
+
+
+ProjectStats
+-
+id number PK
+projectID number FK - Project.id
+numberOfPipelines number 
+areTestsAvailable  boolean
+numberOfTestReports number
+averageDurationOfPipelines  number
+averageDurationOfPipelines_inMinutes  number
+testCoverage number
+numberOfSuccessfulPipelines  number
+numberOfFailedPipelines  number
+numberOfCanceledPipelines  number
+numberOfRunningPipelines  number
+numberOfSkippedPipelines  number
+pipelinesSuccessRatio  number
+
+

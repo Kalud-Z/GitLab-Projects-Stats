@@ -1,0 +1,26 @@
+
+
+<main class="cardsContainer"  [ngClass]="{'cardsContainer-filterActive' : (this.synchUIService.filterByNameSearchQuery$ | async) }" >
+
+  <div class="groupCard" *ngFor="let group of (allGroupsSorted | searchProjectOrGroup:searchQuery)" (click)="showProjects($event , group)">
+
+    <div class="groupCard__header"> {{ group.name }}  </div>
+
+    <div class="groupCard__body">
+      <ng-container *ngIf="group.name !== 'Customers'">
+        <div class="groupCard__body__project" *ngFor="let project of group.projects"> {{ project.name }} </div>
+      </ng-container>
+
+      <ng-container *ngIf="group.name === 'Customers'">
+        <div class="groupCard__body__subGroup  groupCard__body__project" *ngFor="let subgroup of group.subGroups" (click)="showProjects($event , subgroup)">
+          {{ subgroup.name }}
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+
+ </main>
+
+
+

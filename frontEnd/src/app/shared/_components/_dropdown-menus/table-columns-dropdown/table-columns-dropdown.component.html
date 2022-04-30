@@ -1,0 +1,23 @@
+
+<main class="container">
+
+  <h3 class="header">
+     <span class="header__text"> Columns </span>
+    <svg class="dropdownArrow">  <use xlink:href="/assets/symbol-defs.svg#icon-select-arrows"></use> </svg>
+  </h3>
+
+  <div class="columnsListWrapper">
+    <div class="columnsListWrapper__item optionStyle" *ngFor="let column of tableColumnsNamesArray"
+         [ngClass]="{'optionStyle-selected  columnsListWrapper__item-selected' : isOptionSelected(column) ,
+          'columnsListWrapper__item-noCLickAllowed' : column === TableColumnsNames.PROJECT_NAME || column === TableColumnsNames.TOTAL_PIPELINES }"
+         (click)="toggleColumn(column)">
+      {{ column }}
+    </div>
+  </div>
+
+
+</main>
+
+
+
+

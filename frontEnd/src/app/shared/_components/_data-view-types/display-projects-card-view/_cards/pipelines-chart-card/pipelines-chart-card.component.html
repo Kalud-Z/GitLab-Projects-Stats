@@ -1,0 +1,30 @@
+
+
+<div class="card">
+
+  <div class="card__header">
+    <span class="card__header__name"> {{ project.name }} </span>
+    <span class="card__header__id">  ID : {{ project.id }} </span>
+<!--    <svg class="card__header__repoIcon" tooltip="go to repository" placement="top" theme="light"  offset="14" (click)="goToRepo($event, project)">-->
+    <svg class="card__header__repoIcon"  (click)="goToRepo($event, project)">
+      <use xlink:href="/assets/symbol-defs.svg#icon-files"></use> </svg>
+      <app-last-pipeline-status [project]="project"></app-last-pipeline-status>
+  </div>
+
+  <div class="card__body">
+    <div class="card__body__info">
+      <p> <span> Nr° Pipelines </span>   <span> : {{ project.pipelines?.length }} </span></p>
+      <p> <span> Avg pipelines Duration </span>  <span> : {{ getAveragePipelinesDuration(project) }}m  </span></p>
+      <p> <span> Nr° Test Reports </span>  <span> : {{ getNumberOfTestReports(project) }} </span></p>
+    </div>
+
+    <div class="card__body__chart">
+      <p class="card__body__chart__title"> Pipeline Stats </p>
+      <app-pipelines-pie-chart  *ngIf="project.stats.numberOfPipelines > 0" [projectObj]="project"></app-pipelines-pie-chart>
+      <p *ngIf="project.stats.numberOfPipelines === 0"> [NO PIPELINES AVAILABLE <br> IN THIS PROJECT] </p>
+    </div>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,149 @@
+@import "src/mixins";
+@import "src/variables";
+
+:host {
+  width: 100%;
+  height: 100%;
+  @include flexCenter;
+  position: relative;
+}
+
+.tableContainer {
+  //background-color: red;
+  border-radius: .5rem;
+  padding : 1rem;
+  height: 91%;
+  width: 99%;
+  overflow-y: scroll;
+  margin-top: -3rem; // for some weird reason , the flexCenter on its parent wasnt enough to center it vertically !
+}
+
+
+.tableList {
+  border: 1px solid #000000;
+  background-color: fade-out($color-lightGray , 0.5) ;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+td , th {
+  border: 1px solid #000000;
+  padding: 1.5rem 1rem;
+}
+
+tbody {
+  font-size: 1.4rem;
+}
+
+thead {
+  border-bottom: 3px solid #000000;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background-color: $color-pink;
+}
+
+tbody tr {
+  height: 4rem;
+  &:hover { background-color: #c0b5fd }
+  &:hover  .buttonsWrapper { opacity: 1 !important }
+}
+
+
+.lastPipelineStatusCell {
+
+   &__cellContentWrapper {
+     height: 100%;
+     width:100%;
+     @include flexCenter;
+
+     app-last-pipeline-status {
+       font-size: 70%;
+     }
+   }
+}
+
+
+
+
+//
+//td:nth-child(2) {
+//
+//}
+
+
+.projectNameCell {
+  //min-height: 100%;
+  //padding: 0 3rem;
+  //padding-top: 0 !important;
+  //height: 100%;
+
+  @include flexCenter;
+  text-align: left;
+
+  &__text { margin-right: auto }
+  .buttonsWrapper {
+    opacity: 0.3;
+    margin-left: 1rem;
+    min-width:fit-content;
+    transition: 0.13s ease-out;
+    @include flexCenter;
+
+    .rowButton {
+      height: 2.5rem;
+      width: 14rem;
+      @include flexCenter;
+
+      &-repo {
+        margin-right: 1.2rem;
+
+        &__icon {
+          height: 1.8rem;
+          width: 1.8rem;
+          fill: currentColor;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.projectInfoPopupBackground {
+  position: absolute;
+  z-index: 22346869;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(2, 0, 0, .5);
+  @include flexCenter;
+
+
+  .projectInfoPopupWrapper {
+    height: 20rem;
+    width: 44rem;
+    @include flexCenter;
+    app-project-info {
+      font-size: 1.5rem;
+    }
+  }
+
+
+}
+
+
+

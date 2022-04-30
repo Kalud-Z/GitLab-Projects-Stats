@@ -1,0 +1,34 @@
+
+
+
+<!--  <div class="adjustSizeButtonsWrapper"  tooltip="increase/decrease chart size | fit-content : shift+F" placement="top" theme="light"  offset="14">-->
+  <div class="adjustSizeButtonsWrapper"  >
+    <div class="adjustSizeButtonsWrapper__resizeTo100"  (click)="setHeightTo100()">
+      <span class="adjustSizeButtonsWrapper__resizeTo100__text" [ngClass]="{'adjustSizeButtonsWrapper__resizeTo100__text-active' : chartHeight === 100}" > 100% </span>
+      <svg class="adjustSizeButtonsWrapper__resizeTo100__icon">  <use xlink:href="/assets/symbol-defs.svg#icon-resize"></use> </svg>
+    </div>
+    <svg class="adjustSizeButtonsWrapper__icon adjustSizeButtonsWrapper__icon-plus"  (click)="increaseChartSize()" >
+      <use xlink:href="/assets/symbol-defs.svg#icon-plus-outline"></use>
+    </svg>
+    <svg class="adjustSizeButtonsWrapper__icon adjustSizeButtonsWrapper__icon-minus" (click)="decreaseChartSize()">
+      <use xlink:href="/assets/symbol-defs.svg#icon-minus-outline"></use>
+    </svg>
+  </div>
+
+
+  <div class="chartWrapper" *ngIf="renderNow" [ngClass]="determineChartSize()" >
+    <canvas baseChart
+            [datasets]="barChartData"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            [labels]="barChartLabels">
+    </canvas>
+
+  </div>
+
+
+  <div class="loadingSpinnerWrapper" *ngIf="showLoadingSpinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>

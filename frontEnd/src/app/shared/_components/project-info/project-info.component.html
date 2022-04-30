@@ -1,0 +1,69 @@
+
+
+
+
+<div class="container"   @projectInfoPopupState>
+  <div class="exitIconWrapper">
+    <svg class="exitIcon">  <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>
+  </div>
+  <div class="container__mainPart">
+    <h3> Project Info : </h3>
+    <ul class="projectInfoWrapper">
+      <li> <label class="projectInfoWrapper__label">
+        <span class="projectInfoWrapper__label__key"> &#8226; Name </span>
+        <span class="projectInfoWrapper__label__colon">:</span>
+      </label>
+              <div class="projectInfoWrapper__value projectName">  {{ projectObj.name }}  </div>
+      </li>
+
+      <li> <label class="projectInfoWrapper__label">
+         <span class="projectInfoWrapper__label__key"> &#8226; ID </span>
+        <span class="projectInfoWrapper__label__colon">:</span>
+      </label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.id }} </div>
+      </li>
+
+      <li> <label class="projectInfoWrapper__label">
+         <span class="projectInfoWrapper__label__key"> &#8226; Repo Size </span>
+        <span class="projectInfoWrapper__label__colon">:</span>
+      </label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.stats.totalRepoSize | convertSizeFromBytesToXXX }} </div>
+      </li>
+
+      <li> <label class="projectInfoWrapper__label">
+        <span class="projectInfoWrapper__label__key"> &#8226; Artifacts Size </span>
+        <span class="projectInfoWrapper__label__colon">:</span>
+      </label>
+        <div class="projectInfoWrapper__value">  {{ projectObj.stats.artifactsSize | convertSizeFromBytesToXXX }} </div>
+      </li>
+
+      <li> <label class="projectInfoWrapper__label">
+        <span class="projectInfoWrapper__label__key"> &#8226; Group Name </span>
+        <span class="projectInfoWrapper__label__colon">:</span>
+      </label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.groupInfo.name }} </div>
+      </li>
+
+      <li> <label class="projectInfoWrapper__label">
+         <span class="projectInfoWrapper__label__key"> &#8226; Group ID </span>
+        <span class="projectInfoWrapper__label__colon">:</span>
+      </label>
+              <div class="projectInfoWrapper__value">  {{ projectObj.groupInfo.id }} </div>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="horizontalSeperationLine"></div>
+
+
+  <div class="container__footer">
+    <div class="container__noPipelinesWarning">
+      <svg class="container__noPipelinesWarning__icon">  <use xlink:href="/assets/symbol-defs.svg#icon-information"></use> </svg>
+      This project has no pipelines yet
+    </div>
+
+
+  </div>
+</div >
+

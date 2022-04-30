@@ -1,0 +1,240 @@
+<div class="tableContainer" [ngClass]="{ blurBackgroundOfPopup : showProjectDetailsNow }">
+
+  <table class="tableList" >
+    <thead>
+    <tr>
+      <th class="totalPipelinesCell" *ngIf="isThisColumnSelected(TableColumnsNames.TOTAL_PIPELINES)">
+        <div class="totalPipelinesCell__contentWrapper">
+          <div class="descIconWrapper" (click)="sortByColumnClicked(TableColumnsNames.TOTAL_PIPELINES)" >
+            <svg class="descIconWrapper__icon" [ngClass]="{ 'descIconWrapper__icon-active' : sortProjects.columnSelected === TableColumnsNames.TOTAL_PIPELINES}">
+            <use xlink:href="/assets/symbol-defs.svg#icon-sort-desc"></use> </svg>
+          </div>
+          <span class="totalPipelinesCell__title"> {{ TableColumnsNames.TOTAL_PIPELINES }} </span>
+          <div class="filterIconWrapper" (click)="pipelinesColumnFilter.isShown = !pipelinesColumnFilter.isShown">
+            <svg class="filterIconWrapper__icon" [ngClass]="{ 'filterIconWrapper__icon-active' : pipelinesColumnFilter.isOn }">
+              <use xlink:href="/assets/symbol-defs.svg#icon-filter"></use>
+            </svg>
+          </div>
+          <div class="filterOptions" *ngIf="pipelinesColumnFilter.isShown">
+            <div class="filterOptions__options pipelinesFilterOptions">
+              <div class="pipelinesFilterOption"  (click)="pipelinesColumnFilter.optionClicked(pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES)"
+                   [ngClass]="{ 'pipelinesFilterOption-selected' : pipelinesColumnFilter.optionSelected === pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES }">
+                {{ pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES }}
+              </div>
+              <div class="pipelinesFilterOption" (click)="pipelinesColumnFilter.optionClicked(pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES)"
+                   [ngClass]="{ 'pipelinesFilterOption-selected' : pipelinesColumnFilter.optionSelected === pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES }">
+                {{ pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES }}
+              </div>
+            </div>
+            <button class="option clearButton" (click)="pipelinesColumnFilter.clear()"> Clear </button>
+          </div>
+        </div>
+      </th>
+
+      <th class="totalPipelinesCell" *ngIf="isThisColumnSelected(TableColumnsNames.REPO_SIZE)">
+        <div class="totalPipelinesCell__contentWrapper">
+          <div class="descIconWrapper" (click)="sortByColumnClicked(TableColumnsNames.REPO_SIZE)" >
+            <svg class="descIconWrapper__icon" [ngClass]="{ 'descIconWrapper__icon-active' : sortProjects.columnSelected === TableColumnsNames.REPO_SIZE}">
+              <use xlink:href="/assets/symbol-defs.svg#icon-sort-desc"></use> </svg>
+          </div>
+          <span class="totalPipelinesCell__title"> {{ TableColumnsNames.REPO_SIZE }} </span>
+<!--          <div class="filterIconWrapper" (click)="pipelinesColumnFilter.isShown = !pipelinesColumnFilter.isShown">-->
+<!--            <svg class="filterIconWrapper__icon" [ngClass]="{ 'filterIconWrapper__icon-active' : pipelinesColumnFilter.isOn }">-->
+<!--              <use xlink:href="/assets/symbol-defs.svg#icon-filter"></use>-->
+<!--            </svg>-->
+<!--          </div>-->
+<!--          <div class="filterOptions" *ngIf="pipelinesColumnFilter.isShown">-->
+<!--            <div class="filterOptions__options pipelinesFilterOptions">-->
+<!--              <div class="pipelinesFilterOption"  (click)="pipelinesColumnFilter.optionClicked(pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES)"-->
+<!--                   [ngClass]="{ 'pipelinesFilterOption-selected' : pipelinesColumnFilter.optionSelected === pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES }">-->
+<!--                {{ pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES }}-->
+<!--              </div>-->
+<!--              <div class="pipelinesFilterOption" (click)="pipelinesColumnFilter.optionClicked(pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES)"-->
+<!--                   [ngClass]="{ 'pipelinesFilterOption-selected' : pipelinesColumnFilter.optionSelected === pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES }">-->
+<!--                {{ pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <button class="option clearButton" (click)="pipelinesColumnFilter.clear()"> Clear </button>-->
+<!--          </div>-->
+        </div>
+      </th>
+
+      <th class="totalPipelinesCell" *ngIf="isThisColumnSelected(TableColumnsNames.ARTIFACTS_SIZE)">
+        <div class="totalPipelinesCell__contentWrapper">
+          <div class="descIconWrapper" (click)="sortByColumnClicked(TableColumnsNames.ARTIFACTS_SIZE)" >
+            <svg class="descIconWrapper__icon" [ngClass]="{ 'descIconWrapper__icon-active' : sortProjects.columnSelected === TableColumnsNames.ARTIFACTS_SIZE}">
+              <use xlink:href="/assets/symbol-defs.svg#icon-sort-desc"></use> </svg>
+          </div>
+          <span class="totalPipelinesCell__title"> {{ TableColumnsNames.ARTIFACTS_SIZE }} </span>
+          <!--          <div class="filterIconWrapper" (click)="pipelinesColumnFilter.isShown = !pipelinesColumnFilter.isShown">-->
+          <!--            <svg class="filterIconWrapper__icon" [ngClass]="{ 'filterIconWrapper__icon-active' : pipelinesColumnFilter.isOn }">-->
+          <!--              <use xlink:href="/assets/symbol-defs.svg#icon-filter"></use>-->
+          <!--            </svg>-->
+          <!--          </div>-->
+          <!--          <div class="filterOptions" *ngIf="pipelinesColumnFilter.isShown">-->
+          <!--            <div class="filterOptions__options pipelinesFilterOptions">-->
+          <!--              <div class="pipelinesFilterOption"  (click)="pipelinesColumnFilter.optionClicked(pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES)"-->
+          <!--                   [ngClass]="{ 'pipelinesFilterOption-selected' : pipelinesColumnFilter.optionSelected === pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES }">-->
+          <!--                {{ pipelinesColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_PIPELINES }}-->
+          <!--              </div>-->
+          <!--              <div class="pipelinesFilterOption" (click)="pipelinesColumnFilter.optionClicked(pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES)"-->
+          <!--                   [ngClass]="{ 'pipelinesFilterOption-selected' : pipelinesColumnFilter.optionSelected === pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES }">-->
+          <!--                {{ pipelinesColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_PIPELINES }}-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <button class="option clearButton" (click)="pipelinesColumnFilter.clear()"> Clear </button>-->
+          <!--          </div>-->
+        </div>
+      </th>
+
+
+
+      <th class="pipelinesAvgDurationCell" *ngIf="isThisColumnSelected(TableColumnsNames.PIPELINES_AVG_DURATION)" >
+        <div class="pipelinesAvgDurationCell__contentWrapper">
+          <span> {{ TableColumnsNames.PIPELINES_AVG_DURATION }} <span class="pipelinesAvgDurationCell__contentWrapper__unit">(minutes)</span> </span>
+          <div class="descIconWrapper" (click)="sortByColumnClicked(TableColumnsNames.PIPELINES_AVG_DURATION)" >
+            <svg class="descIconWrapper__icon" [ngClass]="{ 'descIconWrapper__icon-active' : sortProjects.columnSelected === TableColumnsNames.PIPELINES_AVG_DURATION}">
+              <use xlink:href="/assets/symbol-defs.svg#icon-sort-desc"></use>
+            </svg>
+          </div>
+        </div>
+      </th>
+
+      <th class="lastPipelineDateCell" *ngIf="isThisColumnSelected(TableColumnsNames.LAST_PIPELINE_DATE)">
+        <div class="lastPipelineDateCell__contentWrapper">
+          <span> {{ TableColumnsNames.LAST_PIPELINE_DATE }} </span>
+          <div class="descIconWrapper" (click)="sortByColumnClicked(TableColumnsNames.LAST_PIPELINE_DATE)" >
+            <svg class="descIconWrapper__icon" [ngClass]="{ 'descIconWrapper__icon-active' : sortProjects.columnSelected === TableColumnsNames.LAST_PIPELINE_DATE}" >  <use xlink:href="/assets/symbol-defs.svg#icon-sort-desc"></use> </svg>
+          </div>
+        </div>
+      </th>
+
+      <th class="lastPipelineStatusHeaderCell" *ngIf="isThisColumnSelected(TableColumnsNames.LAST_PIPELINE_STATUS)" >
+        <div class="lastPipelineStatusHeaderCell__contentWrapper">
+          <span> {{ TableColumnsNames.LAST_PIPELINE_STATUS }} </span>
+          <div class="filterIconWrapper" (click)="lastPipelineStatusFilter.isShown = !lastPipelineStatusFilter.isShown">
+            <svg class="filterIconWrapper__icon" [ngClass]="{ 'filterIconWrapper__icon-active' : lastPipelineStatusFilter.isOn }">
+              <use xlink:href="/assets/symbol-defs.svg#icon-filter"></use>
+            </svg>
+          </div>
+          <div class="filterOptions" *ngIf="lastPipelineStatusFilter.isShown">
+              <div class="option option-success"  (click)="lastPipelineStatusFilter.optionClicked(lastPipelineStatusFilter.options.SUCCESS)"
+                   [ngClass]="{ 'option-selected' : lastPipelineStatusFilter.optionsSelected.indexOf(lastPipelineStatusFilter.options.SUCCESS) !== -1 }"> success </div>
+
+            <div class="option option-failed"  (click)="lastPipelineStatusFilter.optionClicked(lastPipelineStatusFilter.options.FAILED)"
+                 [ngClass]="{ 'option-selected' : lastPipelineStatusFilter.optionsSelected.indexOf(lastPipelineStatusFilter.options.FAILED) !== -1 }"> failed </div>
+
+            <div class="option option-canceled"  (click)="lastPipelineStatusFilter.optionClicked(lastPipelineStatusFilter.options.CANCELED)"
+                 [ngClass]="{ 'option-selected' : lastPipelineStatusFilter.optionsSelected.indexOf(lastPipelineStatusFilter.options.CANCELED) !== -1 }"> canceled </div>
+
+            <div class="option option-skipped"  (click)="lastPipelineStatusFilter.optionClicked(lastPipelineStatusFilter.options.SKIPPED)"
+                 [ngClass]="{ 'option-selected' : lastPipelineStatusFilter.optionsSelected.indexOf(lastPipelineStatusFilter.options.SKIPPED) !== -1 }"> skipped </div>
+
+            <div class="option option-running"  (click)="lastPipelineStatusFilter.optionClicked(lastPipelineStatusFilter.options.RUNNING)"
+                 [ngClass]="{ 'option-selected' : lastPipelineStatusFilter.optionsSelected.indexOf(lastPipelineStatusFilter.options.RUNNING) !== -1 }"> running </div>
+
+              <button class="option clearButton" (click)="lastPipelineStatusFilter.clear()" > Clear </button>
+          </div>
+        </div>
+      </th>
+
+      <th> {{ TableColumnsNames.PROJECT_NAME }} </th>
+
+      <th class="testCoverageCell" *ngIf="isThisColumnSelected(TableColumnsNames.TEST_COVERAGE)" >
+        <div class="testCoverageCell__contentWrapper">
+          <span> {{ TableColumnsNames.TEST_COVERAGE }} </span>
+
+          <div class="descIconWrapper" (click)="sortByColumnClicked(TableColumnsNames.TEST_COVERAGE)" >
+            <svg class="descIconWrapper__icon" [ngClass]="{ 'descIconWrapper__icon-active' : sortProjects.columnSelected === TableColumnsNames.TEST_COVERAGE}" >
+              <use xlink:href="/assets/symbol-defs.svg#icon-sort-desc"></use>
+            </svg>
+
+          </div>
+
+          <div class="filterIconWrapper" (click)="testCoverageColumnFilter.isShown = !testCoverageColumnFilter.isShown">
+            <svg class="filterIconWrapper__icon" [ngClass]="{ 'filterIconWrapper__icon-active' : testCoverageColumnFilter.isOn }">
+              <use xlink:href="/assets/symbol-defs.svg#icon-filter"></use>
+            </svg>
+          </div>
+
+          <div class="filterOptions" *ngIf="testCoverageColumnFilter.isShown">
+            <div class="filterOptions__options testCoverageFilterOptions">
+              <div class="testCoverageFilterOption"  (click)="testCoverageColumnFilter.optionClicked(testCoverageColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_TEST_COVERAGE)"
+                   [ngClass]="{ 'testCoverageFilterOption-selected' : testCoverageColumnFilter.optionSelected === testCoverageColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_TEST_COVERAGE }">
+                {{ testCoverageColumnFilter.allOptions.SHOW_ONLY_PROJECTS_WITH_NO_TEST_COVERAGE }}
+              </div>
+              <div class="testCoverageFilterOption" (click)="testCoverageColumnFilter.optionClicked(testCoverageColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_TEST_COVERAGE)"
+                   [ngClass]="{ 'testCoverageFilterOption-selected' : testCoverageColumnFilter.optionSelected === testCoverageColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_TEST_COVERAGE }">
+                {{ testCoverageColumnFilter.allOptions.HIDE_PROJECTS_WITH_NO_TEST_COVERAGE }}
+              </div>
+            </div>
+            <button class="option clearButton" (click)="testCoverageColumnFilter.clear()"> Clear </button>
+          </div>
+
+        </div>
+      </th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr *ngFor="let currentlyDisplayedProject of allProjectsRaw  | howFarWeGoBack: howFarWeGoBackCurrentlySelected
+                                                                 | lastPipelineStatusColumnFilter: lastPipelineStatusFilter.optionsSelected
+                                                                 | pipelinesColumnFilter: pipelinesColumnFilter.optionSelected
+                                                                 | testCoverageColumnFilter: testCoverageColumnFilter.optionSelected
+                                                                 | sortProjectBasedOnColumn: sortProjects.columnSelected
+                                                                 | filterProjectsByNameOrID: searchQuery">
+      <td *ngIf="isThisColumnSelected(TableColumnsNames.TOTAL_PIPELINES)" > {{ currentlyDisplayedProject.pipelines.length }} </td>
+
+      <td *ngIf="isThisColumnSelected(TableColumnsNames.REPO_SIZE)" > {{ currentlyDisplayedProject.stats.totalRepoSize | convertSizeFromBytesToXXX }} </td>
+
+      <td *ngIf="isThisColumnSelected(TableColumnsNames.ARTIFACTS_SIZE)" > {{ currentlyDisplayedProject.stats.artifactsSize | convertSizeFromBytesToXXX }} </td>
+
+      <td *ngIf="isThisColumnSelected(TableColumnsNames.PIPELINES_AVG_DURATION)">
+<!--        {{ currentlyDisplayedProject.pipelines.avgDuration }}-->
+        999
+      </td>
+
+      <td class="lastPipelineDateCell" *ngIf="isThisColumnSelected(TableColumnsNames.LAST_PIPELINE_DATE)">
+        {{ getLastPipelineDate(currentlyDisplayedProject) }}
+      </td>
+
+      <td class="lastPipelineStatusCell" *ngIf="isThisColumnSelected(TableColumnsNames.LAST_PIPELINE_STATUS)" >
+        <div class="lastPipelineStatusCell__cellContentWrapper">
+          <app-last-pipeline-status [inTableListView]="true"  [project]="currentlyDisplayedProject"></app-last-pipeline-status>
+        </div>
+      </td>
+
+      <td>
+        <div class="projectNameCell">
+          <span class="projectNameCell__text"> {{ currentlyDisplayedProject.name }} </span>
+          <div class="buttonsWrapper">
+            <div class="rowButton rowButton-repo repoButtonInnerPositioning mainButtonStyle mainButtonStyle-textBlue"
+                 (click)="goToRepo(currentlyDisplayedProject)">
+              <span class="rowButton-repo__text repoButtonInnerPositioning__text">REPO</span>
+              <svg class="rowButton-repo__icon repoButtonInnerPositioning__icon" >  <use xlink:href="/assets/symbol-defs.svg#icon-files"></use> </svg>
+            </div>
+            <div class="rowButton rowButton-details mainButtonStyle mainButtonStyle-textBlue"
+                 (click)="showProjectDetails(currentlyDisplayedProject)"> DETAILS
+            </div>
+          </div>
+        </div>
+      </td>
+
+      <td class="testCoverageCell" *ngIf="isThisColumnSelected(TableColumnsNames.TEST_COVERAGE)">
+        {{  formatTestCoverageFN(currentlyDisplayedProject.stats.testCoverage) }}
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+<div class="projectInfoPopupBackground" *ngIf="showProjectDetailsNow">
+  <div class="projectInfoPopupWrapper">
+    <app-project-info [projectObj]="clickedProject" (closeProjectInfoWindow)="showProjectDetailsNow = false" ></app-project-info>
+  </div>
+</div>
+

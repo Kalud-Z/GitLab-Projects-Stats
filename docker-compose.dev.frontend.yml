@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_USER: kalud
+      POSTGRES_PASSWORD: xxx
+      POSTGRES_DB: kalud-db
+    volumes:
+      - postgres-database:/var/lib/postgresql/data
+
+#  nestjs-api:
+#    build: ./backEnd/gitlab-stats-api
+#    depends_on:
+#      - postgres
+#    environment:
+#      DATABASE_URL: postgres://kalud:xxx@postgres:5432/kalud-db
+#    ports:
+#      - "3000:3000"
+
+
+  nestjs-api:
+    build:
+      context: ./backEnd/gitlab-stats-api
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://kalud:xxx@postgres:5432/kalud-db
+    ports:
+      - "3000:3000"
+
+
+volumes:
+  postgres-database:

@@ -1,0 +1,36 @@
+@import "src/mixins";
+
+//@import 'src/variables.scss' ;
+
+
+
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 128, 0, 0.144);
+  @include flexCenter;
+  font-family: 'Staatliches', cursive;
+  font-size: 6rem;
+}
+
+
+.main {
+  padding: 6rem 9rem;
+  box-shadow: 0px 0px 4px 1px rgba(0,0,0,1);
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.logo-wrapper {
+  margin-top: 10rem;
+}
+
+.logo {
+  height: 13rem;
+  width: 13rem;
+  fill: red;
+}
+

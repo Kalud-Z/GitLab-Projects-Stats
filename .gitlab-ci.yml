@@ -1,0 +1,135 @@
+image: docker:latest
+services:
+  - docker:dind
+
+
+#
+#only:
+#  - some_branch_name
+#
+#  ===> whether you push to master or to that branch , the pipelines will be triggered for that branch you chose.
+# next : how to make it get triggered when code was pushed to only that specific branch ?
+
+
+stages:
+  - build
+  - package
+  - deploy
+
+build-frontend:
+  stage: build
+  image: trion/ng-cli-karma:7.3.0
+  script:
+    - cd frontEnd
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - frontEnd/dist/
+    expire_in: 1 week
+  tags:
+    - linux
+    - docker
+  only:
+    - master
+
+
+
+build-backend:
+  stage: build
+  image: node:10
+  script:
+    - cd backEnd/gitlab-stats-api/
+    - npm i @nestjs/cli
+    - npm run build
+  artifacts:
+    paths:
+      - backEnd/gitlab-stats-api/dist/
+    expire_in: 1 week
+  tags:
+    - linux
+    - docker
+  only:
+    - master
+
+package-frontend:
+  stage: package
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - pwd
+    - ls -la
+    - docker build -t registry.gitlab.com/w11k-devs/intern/gitlab-stats/client:latest -f frontEnd/Dockerfile .
+    - docker push registry.gitlab.com/w11k-devs/intern/gitlab-stats/client:latest
+  tags:
+    - linux
+    - docker
+  only:
+    - master
+
+
+package-backend:
+  stage: package
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.gitlab.com/w11k-devs/intern/gitlab-stats/backend:latest -f backEnd/gitlab-stats-api/Dockerfile .
+    - docker push registry.gitlab.com/w11k-devs/intern/gitlab-stats/backend:latest
+  tags:
+    - linux
+    - docker
+  only:
+    - master
+
+package-docker-db:
+  stage: package
+  script:
+    - docker create -e 'POSTGRES_USER=kalud' -e 'POSTGRES_PASSWORD=xxx' -e 'POSTGRES_DB=kalud-db' --volume postgres-database:/var/lib/postgresql/data -p 15432:5432 --name postgres-db postgres
+    - docker start postgres-db
+    - sleep 20 
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker commit postgres-db registry.gitlab.com/w11k-devs/intern/gitlab-stats/db
+    - docker push registry.gitlab.com/w11k-devs/intern/gitlab-stats/db
+  tags:
+    - linux
+    - docker
+  only:
+    - master
+
+
+#deploy-docker-titanic:
+#  stage: deploy
+#  script:
+#    - ssh gitlab@titanic "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com"
+#    - ssh gitlab@titanic "cd git/gitlab-stats && docker-compose stop && docker-compose pull && docker-compose up -d"
+#  tags:
+#    - linux
+#    - shell
+#  #when: manual
+#  only:
+#    - master
+
+
+
+deploy-frontend: 
+  stage: deploy 
+  script: 
+    - curl -X POST https://portainer.w11k-dev.de/api/webhooks/625c71ab-5ea4-46b1-84b9-a6acf73e170a
+  tags: 
+    - linux 
+    - shell 
+  only: 
+    - master 
+  
+
+
+
+deploy-backend: 
+  stage: deploy 
+  script: 
+    - curl -X POST https://portainer.w11k-dev.de/api/webhooks/068534f1-32aa-4cb3-b028-511fbbbf9cbc
+  tags: 
+    - linux 
+    - shell 
+  only: 
+    - master 
+  
+

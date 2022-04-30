@@ -1,0 +1,22 @@
+
+
+
+<div class="searchBoxContainer"   *ngIf="shouldWeHideThisElement()"
+     [ngClass]="{ blurElement : shouldWeHideThisComponent() }">
+
+  <input  class="searchBox"  #searchInput
+    type="text"   [placeholder]="getPlaceHolderText()"
+    (input)="typingSearchQuery(searchInput.value)">
+
+  <div class="iconsContainer">
+    <div class="iconWrapper">
+      <svg class="icon icon-delete" [ngClass]="{'icon-show' : searchInput.value.length > 0}" (click)="deleteSearchQuery()">
+        <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>
+    </div>
+
+    <div class="iconWrapper">
+      <svg class="icon icon-search"> <use xlink:href="/assets/symbol-defs.svg#icon-search"></use> </svg>
+    </div>
+  </div>
+
+</div>

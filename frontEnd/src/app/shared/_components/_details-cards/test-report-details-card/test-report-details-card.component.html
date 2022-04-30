@@ -1,0 +1,137 @@
+
+<div class="popupWrapper" *ngIf="showTestReportDetails"  appNavigateUpDown
+     [testReport]="testReport"  (closeWindow)="closePopupWindow($event)"
+       [currentlySelectedTestCase]="testCaseSelected" [currentlySelectedTestSuite]="testSuiteSelected"
+     (nextTestSuiteToSelect$)="testSuiteSelected = $event"  (nextTestCaseToSelect$)="testCaseSelected = $event">
+
+    <div class="testReportDetailsContainer"  @projectInfoPopupState>
+
+        <div class="left">
+            <h3 class="left__header"> Test Report Details </h3>
+            <div class="left__body pipelineInfoBody pipelineCard__body">
+                <ul class="infoWrapper">
+                    <li>
+                        <label class="infoWrapper__label">&#8226; Failed Count  <span class="infoWrapper__label__colon">:</span> </label>
+                        <div class="infoWrapper__value pipelineID">  {{ testReport.failed_count }}  </div>
+                    </li>
+                    <li>
+                        <label class="infoWrapper__label">&#8226; Skipped Count <span class="infoWrapper__label__colon">:</span></label>
+                        <div class="infoWrapper__value">  {{ testReport.skipped_count }} </div>
+                    </li>
+                    <li>
+                        <label class="infoWrapper__label">&#8226; Success Count  <span class="infoWrapper__label__colon">:</span></label>
+                        <div class="infoWrapper__value">  {{ testReport.success_count }} </div>
+                    </li>
+                    <li>
+                        <label class="infoWrapper__label">&#8226; Total Count <span class="infoWrapper__label__colon">:</span></label>
+                        <div class="infoWrapper__value">  {{ testReport.total_count }} </div>
+                    </li>
+                    <li>
+                        <label class="infoWrapper__label">&#8226; Total Time <span class="infoWrapper__label__colon">:</span></label>
+                        <div class="infoWrapper__value">  {{ testReport.total_time }}s </div>
+                    </li>
+                    <li class="collapsibleItemContainer" >
+                        <label class="infoWrapper__label" (click)="toggleItems(collapsibleItemsType.TestSuites)">
+                            Test Suites ({{ testReport.test_suites.length }})
+                            <svg class="dropdownArrow">  <use xlink:href="/assets/symbol-defs.svg#icon-select-arrows"></use> </svg>
+                        </label>
+                        <ul  [ngClass]="{shown : collapseTestSuites}">
+                            <li  *ngFor="let testSuite of testReport.test_suites" [ngClass]="{ selected : testSuite === testSuiteSelected }"
+                                 (click)="testSuiteSelected = testSuite; $event.stopPropagation()">
+                                {{ testSuite.name }}
+                                <svg>  <use xlink:href="/assets/symbol-defs.svg#icon-arrow_forward_ios"></use> </svg>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="right" appNavigateUpDown [testReport]="testReport" >
+            <div class="top">
+                <h3 class="left__header"> Test Suite Details </h3>
+                <div class="left__body pipelineInfoBody pipelineCard__body" *ngIf="testSuiteSelected">
+                    <ul class="infoWrapper">
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Name  <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testSuiteSelected.name }} </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Total Count  <span class="infoWrapper__label__colon">:</span> </label>
+                            <div class="infoWrapper__value pipelineID">  {{ testSuiteSelected.total_count }}  </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Error Count <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testSuiteSelected.error_count }} </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Skipped Count <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testSuiteSelected.skipped_count }} </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226;   Success Count <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testSuiteSelected.success_count }} </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Total Time <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testSuiteSelected.total_time }}s </div>
+                        </li>
+                        <li class="collapsibleItemContainer" >
+                            <label class="infoWrapper__label rightTop" (click)="toggleItems(collapsibleItemsType.TestCases)"> Test Cases ({{ testSuiteSelected.test_cases.length }})
+                                <svg class="dropdownArrow">  <use xlink:href="/assets/symbol-defs.svg#icon-select-arrows"></use> </svg>
+                            </label>
+                            <ul [ngClass]="{shown : collapseTestCases}">
+                                <li  class="rightTop" [ngClass]="{ selected : testCase === testCaseSelected }"
+                                     *ngFor="let testCase of testSuiteSelected.test_cases"
+                                     (click)="testCaseSelected = testCase; $event.stopPropagation()">
+                                    {{ testCase.name }}
+                                    <svg>  <use xlink:href="/assets/symbol-defs.svg#icon-arrow_forward_ios"></use> </svg>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="bottom">
+                <h3 class="left__header"> Test Case Details </h3>
+                <div class="left__body pipelineInfoBody pipelineCard__body" *ngIf="testCaseSelected">
+                    <ul class="infoWrapper">
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Name <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testCaseSelected.name }} </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Classname  <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testCaseSelected.classname }} </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Status <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testCaseSelected.status }} </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226; Execution Time  <span class="infoWrapper__label__colon">:</span> </label>
+                            <div class="infoWrapper__value pipelineID">  {{ testCaseSelected.execution_time }}s  </div>
+                        </li>
+                        <li>
+                            <label class="infoWrapper__label">&#8226;  System Output <span class="infoWrapper__label__colon">:</span></label>
+                            <div class="infoWrapper__value">  {{ testCaseSelected.system_output ? testCaseSelected.system_output : 'No system output available' }} </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="instructionBanner instructionBanner-testReport" *ngIf="true" @displayPipelineChartBannerState>
+<!--        <svg class="instructionBanner__deleteIcon">  <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>-->
+    <svg class="instructionBanner__icon">  <use xlink:href="/assets/symbol-defs.svg#icon-information"></use> </svg>
+    Click a test report on the chart to display its details
+</div>

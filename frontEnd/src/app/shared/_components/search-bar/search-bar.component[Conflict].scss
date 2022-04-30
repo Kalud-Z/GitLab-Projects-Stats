@@ -1,0 +1,92 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+:host {
+  height: 4rem;
+  width: 28rem;
+  margin-left: 2rem;
+}
+
+
+
+.searchBoxContainer {
+  height: 100%;
+  width: 100%;
+  font-size: 1.4rem;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 200, 0.3);
+  //border-bottom-left-radius: 6px;
+  //border-bottom-right-radius: 6px;
+  border-top: none;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+
+
+
+  .searchBox {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    justify-self: end;
+    width:100%;
+    height: 100%;
+    padding: 1rem;
+    color : inherit;
+    border:none;
+    background-color: transparent;
+    &:focus { outline:none }
+    &::placeholder { color : darkgray }
+  }
+
+  .iconsContainer {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    justify-self: end;
+    height: 100%;
+    width: fit-content;
+    //background-color: yellow;
+    //border-top-right-radius: 4px ;
+    //border-bottom-right-radius: 4px;
+
+    @include flexCenter;
+
+    .iconWrapper {
+      height: 100%;
+      width: 4.5rem;
+      @include flexCenter;
+      padding: 0 1rem;
+
+      &:first-child {
+        background-color: red;
+        height: 80%;
+        width: 7rem;
+        margin-right: 0.5rem;
+      }
+      &:nth-child(2) {
+        background: #caffca;
+        background: linear-gradient(0deg, $color-green 0%, rgba(255, 255, 255, 0) 100%);
+      }
+
+      .icon {
+        filter: opacity(60%);
+        height: 100%;
+        width: 100%;
+
+        &-search {
+
+        }
+
+        &-delete {
+          background-color: yellow;
+        }
+      }
+    }
+
+  }
+
+}
+
+
+
+

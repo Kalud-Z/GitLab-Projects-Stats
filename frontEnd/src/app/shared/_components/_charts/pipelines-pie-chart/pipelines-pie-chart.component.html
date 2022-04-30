@@ -1,0 +1,25 @@
+
+
+<div class="container">
+
+  <div class="chart">
+    <canvas baseChart
+            [datasets]="successRatioChart.pieChartDataSets"
+            [labels]="successRatioChart.pieChartLabels"
+            [chartType]="successRatioChart.pieChartType"
+            [options]="successRatioChart.pieChartOptions"
+            [plugins]="successRatioChart.pieChartPlugins"
+            [legend]="successRatioChart.pieChartLegend">
+    </canvas>
+  </div>
+
+  <div class="successRatioBar">
+    <label> Success Ratio of Pipelines </label>
+    <progress-bar [progress]="projectObj.stats.pipelinesSuccessRatio" [color]="'#6666de'"></progress-bar>
+  </div>
+
+</div>
+
+
+
+<!--[data]="successRatioChart.pieChartData"-->

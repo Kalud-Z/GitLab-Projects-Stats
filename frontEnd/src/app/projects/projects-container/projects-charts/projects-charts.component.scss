@@ -1,0 +1,15 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+
+:host {
+  position: relative;
+  height: 97%;
+  width: 99.8%;
+  display : block;
+  //overflow-y: scroll;
+  overflow-y: hidden;
+
+}
+

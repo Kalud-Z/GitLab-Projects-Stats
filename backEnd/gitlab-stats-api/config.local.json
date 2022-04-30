@@ -1,0 +1,11 @@
+{
+  "dbConfig": {
+    "type": "postgres",
+    "host": "localhost",
+    "port": 15432,
+    "username": "kalud",
+    "password": "xxx",
+    "database": "kalud-db",
+    "synchronize": true
+  }
+}

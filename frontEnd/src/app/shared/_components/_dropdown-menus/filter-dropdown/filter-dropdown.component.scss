@@ -1,0 +1,185 @@
+@import "src/mixins";
+@import "src/variables";
+
+
+:host {
+  height: 4rem;
+  margin-left: 2rem;
+}
+
+
+.filterContainer {
+  width: fit-content;
+  height: 100%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 1px 1px 1px rgb(0,0,200, 0.3);
+  //border-bottom-left-radius: 4px;
+  //border-bottom-right-radius: 4px;
+
+  @include flexCenter;
+  position: relative;
+
+  &:hover .filterOptionsWrapper {
+      opacity: 1;
+      visibility: visible;
+  }
+
+  &:hover .filterOptionsContainer {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+
+
+
+  .header {
+    height: 100%;
+    //border-bottom-left-radius: 4px ;
+    //border-bottom-right-radius: 4px ;
+    width:fit-content;
+
+    @include flexCenter;
+
+    &__label {
+      padding: 0 2rem;
+      height:100%;
+      @include flexCenter;
+    }
+
+    &__status {
+      z-index: 100;
+      padding: 0 0rem;
+      background: $color-green;
+      background: linear-gradient(0deg, $color-green 0%, rgb(77, 253, 186 , 0) 100%);
+
+      width: 9rem;
+      height:100%;
+
+      @include flexCenter;
+
+      .toggleButtonWrapper {
+        height:60%;
+        width: 70%;
+        border-radius: 5px;
+        border:1px solid rgb(0, 0, 0 , 0.3);
+        @include displayGrid-1row-1column-center-items;
+
+        &__button {
+          font-family: 'Roboto Slab', serif;
+          letter-spacing: 0.5px;
+          font-weight: lighter;
+          transform: translateX(-36%);
+          height: 100%;
+          min-width:60%;
+          border-radius: 5px;
+          background-color: lighten(#80d280 , 10%) ;
+          border-right:1px solid rgb(0, 0, 0 , 0.3);
+
+          @include flexCenter;
+          transition: .1s ease-out;
+          &-on {
+            transform: translateX(36%);
+            border-left:1px solid rgb(0, 0, 0 , 0.35);
+            border-right:1px solid rgb(0, 0, 0 , 0);
+            background-color: darken(#80d280 , 10%) ;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  .filterOptionsWrapper {
+    top:112%;
+
+    .filterOption {
+      width: 30rem;
+    }
+  }
+}
+
+
+.filterOptionsContainer {
+  transition: 0.1s ease-out;
+  opacity: 0;
+  visibility: hidden;
+
+  z-index: 201;
+  position: absolute;
+  top:112%;
+  left:0;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 200, 0.5);
+  background-color: #fec3b8;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: 1fr;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    background-color: transparent;
+    top: -6px;
+    left: 0;
+    width: 53%;
+    height: 1rem;
+  }
+
+  &__column {
+    padding: 0;
+    padding-top: 1rem;
+    height: auto;
+    width:fit-content;
+    @include flexCenter;
+    flex-direction: column;
+
+    &-left {
+      margin-right: 1.5rem;
+      border-right: 1px solid rgba(0, 0, 200, 0.25);
+    }
+
+    &-right {
+      border-left: 1px solid rgba(0, 0, 200, 0.25);
+
+      .optionsWrapper__option {
+        width: 23.5rem;
+      }
+    }
+
+    &__title {
+      align-self: flex-start;
+      margin-left: 1rem;
+      font-size: 1.3rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .optionsWrapper {
+      background-color: grey;
+
+      &__option {
+        //padding:0.5rem 1rem;
+        //background-color: red;
+        //border-bottom: 2px solid blue;
+      }
+    }
+
+
+  }
+
+}
+
+
+//  UTILITY CLASSES #######################################################################################
+
+.not_ready_yet {
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+

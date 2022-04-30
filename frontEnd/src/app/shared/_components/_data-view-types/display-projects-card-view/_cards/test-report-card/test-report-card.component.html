@@ -1,0 +1,20 @@
+
+
+<div class="card">
+
+  <div class="card__header">
+    <span class="card__header__name"> {{ project.name }} </span>
+    <span class="card__header__id">  ID : {{ project.id }} </span>
+<!--    <svg class="card__header__repoIcon" tooltip="go to repository" placement="top" theme="light"  offset="14" (click)="goToRepo($event, project)">-->
+    <svg class="card__header__repoIcon"  (click)="goToRepo($event, project)">
+      <use xlink:href="/assets/symbol-defs.svg#icon-files"></use> </svg>
+  </div>
+
+  <div class="card__body">
+    <div class="card__body__chart">
+      <app-test-report-chart  *ngIf="project.stats.areTestsAvailable  && project.pipelines.length > 0" [projectSetter]="project"></app-test-report-chart>
+      <p *ngIf="!project.stats.areTestsAvailable || project.pipelines.length === 0"> [NO TEST REPORT AVAILABLE <br> IN THIS PROJECT] </p>
+    </div>
+  </div>
+
+</div>

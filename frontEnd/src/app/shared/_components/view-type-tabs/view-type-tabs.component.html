@@ -1,0 +1,18 @@
+
+
+<nav class="nav" *ngIf="shouldWeHideThisComponent()">
+<!--  <div class="nav__item list"  [ngClass]="{ 'nav__item-active' : selectedTab == viewTypes.CHART_VIEW && !routingService.areWeInDetailsView() }"-->
+<!--       (click)="showChartView()"> Charts-->
+<!--  </div>-->
+
+  <div class="nav__item list"  [ngClass]="{ 'nav__item-active' : selectedTab == viewTypes.LIST_VIEW && !routingService.areWeInDetailsView() }"
+       (click)="showListView()">  List View </div>
+
+<!--  <div class="nav__item list"  [ngClass]="{ 'nav__item-active' : selectedTab == viewTypes.CARDS_VIEW && !routingService.areWeInDetailsView() }"-->
+<!--       (click)="showCardView()">  Cards View-->
+<!--  </div>-->
+
+  <div class="nav__item list"  [ngClass]="{ 'nav__item-active' : selectedTab == viewTypes.DASHBOARD_VIEW && !routingService.areWeInDetailsView() }"
+       (click)="showDashboardView()">  Dashboard
+  </div>
+</nav>

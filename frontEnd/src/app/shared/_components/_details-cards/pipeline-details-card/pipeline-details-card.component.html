@@ -1,0 +1,83 @@
+
+
+<div class="pipelineCard" *ngIf="pipelineObject">
+
+  <div class="pipelineInfoContainer">
+    <h3 class="pipelineInfoHeader pipelineCard__header"> Pipeline Info </h3>
+    <div class="pipelineInfoBody pipelineCard__body">
+        <ul class="infoWrapper">
+          <li>
+            <label class="infoWrapper__label">&#8226; ID  <span class="infoWrapper__label__colon">:</span> </label>
+            <div class="infoWrapper__value pipelineID">  {{ pipelineObject.id }}  </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Status <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.status }} </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Test Reports  <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.stats.isTestReportAvailable ? 'available' : 'none' }} </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Duration <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.stats.duration_inMinutes }}m </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Test Coverage <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ formatTestCoverageFN(pipelineObject.stats.testCoverage) }} </div>
+          </li>
+
+        </ul>
+    </div>
+
+  </div>
+
+
+  <div class="testReportContainer"  >
+      <h3 class="testReportHeader pipelineCard__header"> Test Report </h3>
+      <div class="testReportBody pipelineCard__body">
+        <ul class="infoWrapper" *ngIf="pipelineObject.stats.isTestReportAvailable">
+          <li>
+            <label class="infoWrapper__label">&#8226; Total time  <span class="infoWrapper__label__colon">:</span> </label>
+            <div class="infoWrapper__value">  {{ pipelineObject.testReport.total_time | number : '1.2-2' }}s </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Total Count <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.testReport.total_count }} </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Success Count <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.testReport.success_count }} </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Skipped Count <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.testReport.skipped_count }}  </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Failed Count <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.testReport.failed_count }} </div>
+          </li>
+          <li>
+            <label class="infoWrapper__label">&#8226; Error Count <span class="infoWrapper__label__colon">:</span></label>
+            <div class="infoWrapper__value">  {{ pipelineObject.testReport.error_count }} </div>
+          </li>
+        </ul>
+        <div class="noTestReportBanner" *ngIf="!pipelineObject.stats.isTestReportAvailable" > No Test Reports Available </div>
+      </div>
+
+  </div>
+
+
+
+</div> <!--  pipelineCard -->
+
+
+
+
+<ng-container *ngIf="showBanner">
+  <div class="instructionBanner" *ngIf="!pipelineObject" @displayPipelineChartBannerState>
+    <svg class="instructionBanner__deleteIcon" (click)="showBanner = false">  <use xlink:href="/assets/symbol-defs.svg#icon-delete"></use> </svg>
+    <svg class="instructionBanner__icon">  <use xlink:href="/assets/symbol-defs.svg#icon-information"></use> </svg>
+    Click a pipeline on the chart to display its details
+  </div>
+</ng-container>

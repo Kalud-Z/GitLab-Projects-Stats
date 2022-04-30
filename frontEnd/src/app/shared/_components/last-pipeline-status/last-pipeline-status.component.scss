@@ -1,0 +1,116 @@
+@import "src/mixins";
+@import "src/variables";
+
+:host {
+  //height: 5rem;
+  //width: 20rem;
+  //height:100%;
+  //width: 100%;
+}
+
+
+.container {
+  padding: .25rem .5rem;
+  height: fit-content;
+  width: fit-content;
+  border-radius: 2px;
+  @include flexCenter;
+  white-space: nowrap;
+  letter-spacing: 2px;
+
+  &-inTableListView {
+    width: 14rem !important;
+  }
+
+  &-undefined {
+    border: 1px solid darken(#e2cbcb , 30%);
+    background-color: #e2cbcb;
+    color: darken(#e2cbcb , 30%)  ;
+    filter: blur(1px);
+  }
+
+  &-success {
+    border: 1px solid lighten(green , 10%);
+    background-color: #4DFDBA;
+    color: lighten(green , 10%)  ;
+  }
+
+  &-failed {
+    border: 1px solid $color-red;
+    background-color: lighten($color-red , 20%);
+    color : $color-red;
+  }
+
+  &-canceled {
+    border: 1px solid darken(#aeaeae , 20%);
+    background-color: #aeaeae;
+    color : darken(#aeaeae , 20%)
+  }
+
+  &-failed {
+    border: 1px solid $color-red;
+    background-color: lighten($color-red , 20%) ;
+  }
+
+  &-skipped {
+    border: 1px solid darken(#8080ff , 20%);
+    background-color: #8080ff;
+    color : darken(#8080ff , 20%);
+  }
+
+  &-running {
+    border: 1px solid darken(#ffff80 , 35%);
+    background-color: #ffff80;
+    color : darken(#ffff80 , 35%);
+  }
+
+
+
+
+  .key {
+    color : dimgray;
+    letter-spacing: 1px;
+    &__colon { font-size: 120% }
+  }
+
+  .value {
+    height: fit-content;
+    width: auto;
+    @include flexCenter;
+    padding-left: 0.5rem;
+    font-size: 120%;
+
+    .icon {
+      height: 1.7rem;
+      width: 1.7rem;
+      margin-left: .65rem;
+      fill: currentColor;
+
+      &-running {
+        -webkit-animation:spin 2s linear infinite;
+        -moz-animation:spin 2s linear infinite;
+        animation:spin 2s linear infinite;
+    }
+  }
+
+}
+
+
+
+}
+
+
+
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+
+
+//'success' | 'failed' | 'canceled' | 'skipped' | 'running' | string
+
+
+//// backgroundColor: ['green' , 'red' , 'gray' , 'lightBlue' , 'yellow']
+//backgroundColor: ['#4dfdba' , '#ff4338' , '#aeaeae' , '#8080ff' , '#ffff80']

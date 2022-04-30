@@ -1,0 +1,62 @@
+
+<div class="filterContainer" *ngIf="!shouldWeHideThisComponent()" [ngClass]="{ blurElement : shouldWeBlurThisComponent() }">
+<!--<div class="filterContainer"  tooltip="based on test coverage" placement="top" theme="light"  offset="14"  *ngIf="!shouldWeHideThisComponent()" [ngClass]="{ blurElement : shouldWeBlurThisComponent() }">-->
+
+  <div class="header">
+    <h3 class="header__label headerLabel" > Filter : </h3>
+    <div class="header__status containerOfDropdownArrow">
+
+      <div class="toggleButtonWrapper" (click)="onDeactivateFilter()">
+        <div class="toggleButtonWrapper__button" [ngClass]="{'toggleButtonWrapper__button-on' : isFilterOn}">
+          {{ isFilterOn ? 'ON' : 'OFF' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ul class="filterOptionsWrapper optionListStyle" *ngIf="!areWeInListView()">
+    <li class="filterOption optionStyle" [ngClass]="{'optionStyle-selected' : removeEmptyEntriesIsOn}"    (click)="onToggle_RemoveEmptyEntries()"> Hide empty entries </li>
+    <li class="filterOption optionStyle" [ngClass]="{'optionStyle-selected' : showOnlyEmptyEntriesIsOn}"  (click)="onToggle_ShowOnlyEmptyEntries()"> Show only empty entries </li>
+  </ul>
+
+
+<!--  <ul class="filterOptionsContainer" *ngIf="areWeInListView()">-->
+<!--    <div class="filterOptionsContainer__column filterOptionsContainer__column-left">-->
+<!--      <span class="filterOptionsContainer__column__title"> Hide projects with :  </span>-->
+<!--      <div class="optionsWrapper">-->
+<!--        <div class="optionsWrapper__option optionStyle"-->
+<!--             [ngClass]="{'optionStyle-selected' : selectedOptions.hideProjects.indexOf(TableColumnsNames.TOTAL_PIPELINES) !== -1}"-->
+<!--             (click)="toggle_HideProjectsOption(TableColumnsNames.TOTAL_PIPELINES)">-->
+<!--          No Pipelines-->
+<!--        </div>-->
+<!--        <div class="optionsWrapper__option optionStyle"-->
+<!--             [ngClass]="{'optionStyle-selected' : selectedOptions.hideProjects.indexOf(TableColumnsNames.TEST_COVERAGE) !== -1}"-->
+<!--             (click)="toggle_HideProjectsOption(TableColumnsNames.TEST_COVERAGE)" >-->
+<!--          No Test Coverage-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="filterOptionsContainer__column filterOptionsContainer__column-right">-->
+<!--      <span class="filterOptionsContainer__column__title"> Show only projects with :  </span>-->
+<!--      <div class="optionsWrapper">-->
+<!--        <div class="optionsWrapper__option optionStyle"-->
+<!--             [ngClass]="{'optionStyle-selected' : selectedOptions.showOnlyProjects.indexOf(TableColumnsNames.TOTAL_PIPELINES) !== -1}"-->
+<!--             (click)="toggle_showOnlyProjectsOption(TableColumnsNames.TOTAL_PIPELINES)">-->
+<!--          No Pipelines-->
+<!--        </div>-->
+<!--        <div class="optionsWrapper__option optionStyle"-->
+<!--             [ngClass]="{'optionStyle-selected' : selectedOptions.showOnlyProjects.indexOf(TableColumnsNames.TEST_COVERAGE) !== -1}"-->
+<!--             (click)="toggle_showOnlyProjectsOption(TableColumnsNames.TEST_COVERAGE)">-->
+<!--          No Test Coverage </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </ul>-->
+
+
+
+</div>
+
+
+
