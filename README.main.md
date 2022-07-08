@@ -1,9 +1,4 @@
 
-TODO :
-
-*) Deploy on Heroku
-
---------------------------------------------
 
 
 `docker-compose up`
